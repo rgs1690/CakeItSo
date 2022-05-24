@@ -2,10 +2,10 @@
 {
     public class Customer
     {
-        int id { get; set; }
-        string name { get; set; }
-        string userId { get; set; }
-        string phone { get; set; }
-        string email { get; set; }
+       public int id { get; set; }
+       public string name { get; set; }
+       public string userId { get; set; }
+       public string phone { get; set; }
+       public string email { get; set; }
     }
 }

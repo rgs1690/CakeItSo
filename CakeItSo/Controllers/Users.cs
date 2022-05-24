@@ -1,43 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using CakeItSo.Models;
+using CakeItSo.Repos;
 
 namespace CakeItSo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Users : ControllerBase
+    public class Users : Controller
     {
-        // GET: api/<Users>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly IUserRepo _userRepo;
 
-        // GET api/<Users>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public Users(IUserRepo userRepo)
         {
-            return "value";
+            _userRepo = userRepo;
         }
 
         // POST api/<Users>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateUser(User user)
         {
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _userRepo.CreateUser(user);
+                return Ok(user);
+            }
         }
 
-        // PUT api/<Users>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<Users>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

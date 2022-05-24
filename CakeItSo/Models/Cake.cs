@@ -2,18 +2,18 @@
 {
     public class Cake
     {
-        int id { get; set; }
-        string name { get; set; }
-        int customerId { get; set; }
-        string recipe { get; set; }
-        string userId { get; set; }
-        decimal foodCostPerServing { get; set; }
-        int numOfGuests { get; set; }
-        int decorTime {get; set;}
-        int bakeTime { get; set; }
-        decimal wagePerHour { get; set; }
-        decimal supplyCost { get; set; }
-        string refImage { get; set; }
-        decimal totalCost { get; set; }
+       public int id { get; set; }
+        public string name { get; set; }
+        public int customerId { get; set; }
+        public string recipe { get; set; }
+        public string userId { get; set; }
+        public decimal foodCostPerServing { get; set; }
+        public int numOfGuests { get; set; }
+        public int decorTime {get; set;}
+        public int bakeTime { get; set; }
+        public decimal wagePerHour { get; set; }
+        public decimal supplyCost { get; set; }
+        public string refImage { get; set; }
+        public decimal totalCost { get; set; }
     }
 }

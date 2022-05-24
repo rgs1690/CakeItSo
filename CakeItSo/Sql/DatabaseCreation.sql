@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS [User];
 CREATE TABLE [Event] (
 id int not null identity primary key,
 [name] varchar(255),
-userId int,
+userId varchar(255),
 customerId int not null,
 cakeId int,
 typeOfEvent varchar(255),
@@ -42,7 +42,7 @@ CREATE TABLE [User] (
 
 CREATE TABLE Customer (
 	id int not null identity primary key,
-	userId int,
+	userId varchar(255),
 	[name] varchar(255),
 	phone varchar(255),
 	email varchar (255),
@@ -51,7 +51,7 @@ CREATE TABLE Customer (
 CREATE TABLE [Cake] (
 	id int not null identity primary key,
 	[name] varchar (255),
-	userId int,
+	userId varchar(255),
 	customerId int not null,
 	recipe varchar (255),
 	foodCostPerServing decimal,

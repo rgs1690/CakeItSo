@@ -2,20 +2,20 @@
 {
     public class Event
     {
-        int id { get; set; }
-        string name { get; set; }
-        string userId { get; set; }
-        int customerId { get; set; }
-        int cakeId { get; set; }
-        string typeOfEvent { get; set; }
-        string venu { get; set; }
-        string venpuPhone { get; set; }
-        string venuAddress { get; set; }
-        string date { get; set; }
-        string time { get; set; }
-        int miles { get; set; }
-        decimal pricePerMile { get; set; }
-        string notes { get; set; }
-        decimal totalPrice {get; set;}
+       public int id { get; set; }
+        public string name { get; set; }
+        public string userId { get; set; }
+        public int customerId { get; set; }
+        public int cakeId { get; set; }
+        public string typeOfEvent { get; set; }
+        public string venu { get; set; }
+        public string venuPhone { get; set; }
+        public string venuAddress { get; set; }
+        public string date { get; set; }
+        public string time { get; set; }
+        public int miles { get; set; }
+        public decimal pricePerMile { get; set; }
+        public string notes { get; set; }
+        public decimal totalPrice {get; set;}
 }
 }

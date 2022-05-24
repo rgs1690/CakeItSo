@@ -1,43 +1,106 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CakeItSo.Models;
+using CakeItSo.Repos;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CakeItSo.Controllers
 {
-    [Route("api/[controller]")]
+    
+    }[Route("api/[controller]")]
     [ApiController]
-    public class Cakes : ControllerBase
+    public class Cakes : Controller
     {
+
+        private readonly ICakeRepo _cakeRepo;
+        public Cakes(ICakeRepo cakeRepo)
+        {
+            _cakeRepo = cakeRepo;
+        }
+
         // GET: api/<Cakes>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetAllCustomers()
         {
-            return new string[] { "value1", "value2" };
+            List<Cake> cakes = _cakeRepo.GetAllCakes();
+            if (cakes == null) return NotFound();
+            return Ok(cakes);
         }
 
         // GET api/<Cakes>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetCakeById(int id)
         {
-            return "value";
+            var match = _cakeRepo.GetCakeById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return Ok(match);
+        }
+
+        // GET api/<Cakes>/user/id
+        [HttpGet("user/{userId}")]
+        public IActionResult GetCakesByUserId(string userId)
+        {
+            var matches = _cakeRepo.GetCakesByUserId(userId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
+        }
+        // GET api/<Cakes>/customer/id
+        [HttpGet("customer/{customerId}")]
+        public IActionResult GetCakesByCustomerId(int customerId)
+        {
+            var matches = _cakeRepo.GetCakesByCustomerId(customerId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
         }
 
         // POST api/<Cakes>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateCake(Cake newCake)
         {
+            if (newCake == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _cakeRepo.CreateNewCake(newCake);
+                return Ok(newCake);
+            }
         }
 
         // PUT api/<Cakes>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult UpdateCake(Cake cake)
         {
+            int id = cake.id;
+            var match = _cakeRepo.GetCakeById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _cakeRepo.UpdateCake(cake);
+                return Ok(cake);
+            }
+
         }
 
-        // DELETE api/<Cakes>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteCake(int id)
         {
+            _cakeRepo.DeleteCake(id);
         }
-    }
+
 }
