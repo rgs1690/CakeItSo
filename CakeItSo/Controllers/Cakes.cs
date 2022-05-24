@@ -21,16 +21,16 @@ namespace CakeItSo.Controllers
         [HttpGet]
         public IActionResult GetAllCustomers()
         {
-            List<Customer> customers = _customerRepo.GetAllCustomers();
-            if (customers == null) return NotFound();
-            return Ok(customers);
+            List<Cake> cakes = _cakeRepo.GetAllCakes();
+            if (cakes == null) return NotFound();
+            return Ok(cakes);
         }
 
         // GET api/<Customers>/5
         [HttpGet("{id}")]
-        public IActionResult GetCustomerById(int id)
+        public IActionResult GetCakeById(int id)
         {
-            var match = _customerRepo.GetCustomerById(id);
+            var match = _cakeRepo.GetCakeById(id);
 
             if (match == null)
             {
@@ -41,9 +41,9 @@ namespace CakeItSo.Controllers
 
         // GET api/<Customers>/user/id
         [HttpGet("user/{userId}")]
-        public IActionResult GetCustomerByUserId(string userId)
+        public IActionResult GetCakesByUserId(string userId)
         {
-            var matches = _customerRepo.GetCustomersByUserId(userId);
+            var matches = _cakeRepo.GetCakesByUserId(userId);
             if (matches == null)
             {
                 return NotFound();
@@ -55,25 +55,25 @@ namespace CakeItSo.Controllers
 
         // POST api/<Customers>
         [HttpPost]
-        public IActionResult CreateCustomer(Customer newCustomer)
+        public IActionResult CreateCake(Cake newCake)
         {
-            if (newCustomer == null)
+            if (newCake == null)
             {
                 return NotFound();
             }
             else
             {
-                _customerRepo.CreateCustomer(newCustomer);
-                return Ok(newCustomer);
+                _cakeRepo.CreateNewCake(newCake);
+                return Ok(newCake);
             }
         }
 
         // PUT api/<Customers>/5
         [HttpPut("{id}")]
-        public IActionResult UpdateCustomer(Customer customer)
+        public IActionResult UpdateCake(Cake cake)
         {
-            int id = customer.id;
-            var match = _customerRepo.GetCustomerById(id);
+            int id = cake.id;
+            var match = _cakeRepo.GetCakeById(id);
 
             if (match == null)
             {
@@ -81,12 +81,16 @@ namespace CakeItSo.Controllers
             }
             else
             {
-                _customerRepo.UpdateCustomer(customer);
-                return Ok(customer);
+                _cakeRepo.UpdateCake(cake);
+                return Ok(cake);
             }
 
         }
-
+        [HttpDelete("{id}")]
+        public void DeleteCake(int id)
+        {
+            _cakeRepo.DeleteCake(id);
+        }
 
     }
 }
