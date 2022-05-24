@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CakeItSo.Controllers
 {
-    [Route("api/[cakes]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class Cakes : Controller
     {
@@ -86,6 +86,7 @@ namespace CakeItSo.Controllers
             }
 
         }
+
         [HttpDelete("{id}")]
         public void DeleteCake(int id)
         {

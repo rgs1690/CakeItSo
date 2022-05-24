@@ -137,7 +137,7 @@ namespace CakeItSo.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                   INSERT INTO Customer (id, [name], userId, phone, email)
+                   INSERT INTO Customer ([name], userId, phone, email)
                     OUTPUT INSERTED.ID
                     VALUES (@name, @userId, @phone, @email);
                     ";
@@ -161,12 +161,12 @@ namespace CakeItSo.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    UPDATE Cake
+                    UPDATE Customer
                     SET
                         [name] = @name,
                         userId = @userId,
                         phone = @phone, 
-                        email = @email.
+                        email = @email
                     WHERE id = @id;
                     ";
                     cmd.Parameters.AddWithValue("@id", customer.id);
