@@ -210,12 +210,12 @@ namespace CakeItSo.Repos
                     cmd.Parameters.AddWithValue("@name", cake.name);
                     cmd.Parameters.AddWithValue("@customerId", cake.customerId);
                     cmd.Parameters.AddWithValue("@recipe", cake.recipe);
-                    cmd.Parameters.AddWithValue("@foodCostsPerServing", cake.foodCostPerServing);
+                    cmd.Parameters.AddWithValue("@foodCostPerServing", cake.foodCostPerServing);
                     cmd.Parameters.AddWithValue("@numOfGuests", cake.numOfGuests);
                     cmd.Parameters.AddWithValue("@decorTime", cake.decorTime);
                     cmd.Parameters.AddWithValue("@bakeTime", cake.bakeTime);
                     cmd.Parameters.AddWithValue("@wagePerHour", cake.wagePerHour);
-                    cmd.Parameters.AddWithValue("@supplyCosts", cake.supplyCost);
+                    cmd.Parameters.AddWithValue("@supplyCost", cake.supplyCost);
                     cmd.Parameters.AddWithValue("@refImage", cake.refImage);
                     cmd.Parameters.AddWithValue("@totalCost", cake.totalCost);
 
@@ -240,13 +240,13 @@ namespace CakeItSo.Repos
                         recipe = @recipe,
                         userId = @userId,
                         foodCostPerServing = @foodCostPerServing, 
-                        numOfGuests = @numOfGuests.
+                        numOfGuests = @numOfGuests,
                         decorTime = @decorTime,
                         bakeTime = @bakeTime,
                         wagePerHour = @wagePerHour,
                         supplyCost = @supplyCost,
                         refImage = @refImage,
-                        totalCost = @totalCost,
+                        totalCost = @totalCost
                     WHERE id = @id;
                     ";
                     cmd.Parameters.AddWithValue("@id", cake.id);
@@ -254,12 +254,12 @@ namespace CakeItSo.Repos
                     cmd.Parameters.AddWithValue("@name", cake.name);
                     cmd.Parameters.AddWithValue("@customerId", cake.customerId);
                     cmd.Parameters.AddWithValue("@recipe", cake.recipe);
-                    cmd.Parameters.AddWithValue("@foodCostsPerServing", cake.foodCostPerServing);
+                    cmd.Parameters.AddWithValue("@foodCostPerServing", cake.foodCostPerServing);
                     cmd.Parameters.AddWithValue("@numOfGuests", cake.numOfGuests);
                     cmd.Parameters.AddWithValue("@decorTime", cake.decorTime);
                     cmd.Parameters.AddWithValue("@bakeTime", cake.bakeTime);
                     cmd.Parameters.AddWithValue("@wagePerHour", cake.wagePerHour);
-                    cmd.Parameters.AddWithValue("@supplyCosts", cake.supplyCost);
+                    cmd.Parameters.AddWithValue("@supplyCost", cake.supplyCost);
                     cmd.Parameters.AddWithValue("@refImage", cake.refImage);
                     cmd.Parameters.AddWithValue("@totalCost", cake.totalCost);
 

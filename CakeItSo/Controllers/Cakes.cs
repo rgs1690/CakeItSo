@@ -17,7 +17,7 @@ namespace CakeItSo.Controllers
             _cakeRepo = cakeRepo;
         }
 
-        // GET: api/<Customers>
+        // GET: api/<Cakes>
         [HttpGet]
         public IActionResult GetAllCustomers()
         {
@@ -26,7 +26,7 @@ namespace CakeItSo.Controllers
             return Ok(cakes);
         }
 
-        // GET api/<Customers>/5
+        // GET api/<Cakes>/5
         [HttpGet("{id}")]
         public IActionResult GetCakeById(int id)
         {
@@ -39,7 +39,7 @@ namespace CakeItSo.Controllers
             return Ok(match);
         }
 
-        // GET api/<Customers>/user/id
+        // GET api/<Cakes>/user/id
         [HttpGet("user/{userId}")]
         public IActionResult GetCakesByUserId(string userId)
         {
@@ -50,10 +50,19 @@ namespace CakeItSo.Controllers
             }
             return Ok(matches);
         }
+        // GET api/<Cakes>/customer/id
+        [HttpGet("customer/{customerId}")]
+        public IActionResult GetCakesByCustomerId(int customerId)
+        {
+            var matches = _cakeRepo.GetCakesByCustomerId(customerId);
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return Ok(matches);
+        }
 
-
-
-        // POST api/<Customers>
+        // POST api/<Cakes>
         [HttpPost]
         public IActionResult CreateCake(Cake newCake)
         {
@@ -68,7 +77,7 @@ namespace CakeItSo.Controllers
             }
         }
 
-        // PUT api/<Customers>/5
+        // PUT api/<Cakes>/5
         [HttpPut("{id}")]
         public IActionResult UpdateCake(Cake cake)
         {
