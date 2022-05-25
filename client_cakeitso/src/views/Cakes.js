@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Cakes() {
   return (
-    <div>Cakes</div>
+    <h1>Cakes</h1>
   )
 }

@@ -12,7 +12,7 @@ export default function NavBar() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <a className="nav-link active" aria-current="page" href="/">StartHere</a>
-          </li>e
+          </li>
           <li className="nav-item">
             <a className="nav-link" href="/Cakes">Cakes</a>
           </li>
