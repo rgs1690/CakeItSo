@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import auth from "./auth/apiKeys";
 import checkUserCreatedInDB from "./auth/checkIfUserCreatedInDB";
 import './App.css';
 import NavBar from './components/NavBar';
@@ -12,7 +11,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged(async (response) => {
+    auth.onAuthStateChanged(async (response) => {
         if (response) {
             const userObj = {
                 uid: response.uid,
