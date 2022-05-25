@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { signOutUser } from '../auth/auth'
 export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -26,7 +26,7 @@ export default function NavBar() {
             <a className="nav-link" href="/YourInfo">Your Info</a>
           </li>
         </ul>
-        <button className="danger">LogOut</button>
+        <button className="Danger" onClick={signOutUser}>LogOut</button>
       </div>
     </div>
   </nav>
