@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import auth from "./auth/apiKeys";
+import { useNavigate } from "react-router-dom";
 import checkUserCreatedInDB from "./auth/checkIfUserCreatedInDB";
 import './App.css';
 import NavBar from './components/NavBar';
 import Routing from './routes';
+import Login from "./views/Login";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,19 +22,17 @@ function App() {
                 token: response.accessToken, //you can save the token in an object if you want
             };
             setUser(userObj);
-            
-            //you can also do this to save the token for later use
             sessionStorage.setItem("token", response.accessToken);
 
-            checkUserCreatedInDB();
-
+            checkUserCreatedInDB(response.accessToken);
+            navigate("/");
         } else {
             setUser(false);
              
             //don't forget to clear the token if using sessionStorage!
             sessionStorage.removeItem("token");
 
-            navigate('/');
+            navigate('/Login');
         }
     });
 }, []);
@@ -41,8 +40,17 @@ function App() {
 
   return (
     <div>
+      {user ? (
+        <>
     <NavBar/>
     <Routing />
+    </>
+      ) : (
+    <>
+    <Login />
+
+    </>
+      )}
     </div>
   );
 }
