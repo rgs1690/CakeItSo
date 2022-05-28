@@ -29,7 +29,7 @@ namespace CakeItSo.Repos
                     cmd.CommandText = @"
                                       SELECT 
                                         id
-                                      FROM User
+                                      FROM [User]
                                       ";
                     SqlDataReader reader = cmd.ExecuteReader();
 

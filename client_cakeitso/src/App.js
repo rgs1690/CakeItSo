@@ -25,7 +25,7 @@ function App() {
             sessionStorage.setItem("token", response.accessToken);
 
             checkUserCreatedInDB(response.accessToken);
-          
+            navigate('/')
         } else {
             setUser(false);
              
