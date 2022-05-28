@@ -1,6 +1,9 @@
-using CakeItSo.Repos;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+
+using Microsoft.IdentityModel.Tokens;
+using CakeItSo.Repos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,16 +21,16 @@ FirebaseApp.Create(new AppOptions()
 {
     Credential = GoogleCredential.FromFile(builder.Configuration["fbCredPath"]),
 });
-builder.Services.AddAuthentication(JwtBearerDefaults.AddAuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.IncludeErrorDetails = true;
-    options.Authority = "https://securetoken.google.com/authpractice-fbf28"; //use your project name
+    options.Authority = "https://securetoken.google.com/thedailythree-7c175";
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = "https://securetoken.google.com/authpractice-fbf28", //use your project name
+        ValidIssuer = "https://securetoken.google.com/thedailythree-7c175",
         ValidateAudience = true,
-        ValidAudience = "authpractice-fbf28",  //use your project name
+        ValidAudience = "cakeitso-b73e5",
         ValidateLifetime = true,
     };
 });
