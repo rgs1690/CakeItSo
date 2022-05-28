@@ -21,6 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.env
+C:\Users\rgs16\workspace\foundations\projects\CakeItSo\CakeItSo\firebaseSDK.json
+C:\Users\rgs16\workspace\foundations\projects\CakeItSo\client_cakeitso\.env
 firebaseSDK.json
