@@ -2,6 +2,7 @@
 using CakeItSo.Models;
 using CakeItSo.Repos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace CakeItSo.Controllers
 {
@@ -30,6 +31,7 @@ namespace CakeItSo.Controllers
                 return Ok(user);
             }
         }
+    
         [Authorize]
         [HttpGet("Auth")]
         public async Task<IActionResult> GetUserAuthStatus()

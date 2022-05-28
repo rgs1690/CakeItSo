@@ -1,8 +1,9 @@
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using CakeItSo.Repos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -23,7 +24,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                          policy.WithOrigins("https://localhost:3000", "https://localhost:7139").AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
@@ -34,11 +35,11 @@ FirebaseApp.Create(new AppOptions()
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.IncludeErrorDetails = true;
-    options.Authority = "https://securetoken.google.com/thedailythree-7c175";
+    options.Authority = "https://securetoken.google.com/cakeitso-b73e5";
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = "https://securetoken.google.com/thedailythree-7c175",
+        ValidIssuer = "https://securetoken.google.com/cakeitso-b73e5",
         ValidateAudience = true,
         ValidAudience = "cakeitso-b73e5",
         ValidateLifetime = true,
@@ -54,7 +55,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+
+app.UseCors(builder => { builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin(); });
+
 app.UseAuthentication();
 app.UseAuthorization();
 

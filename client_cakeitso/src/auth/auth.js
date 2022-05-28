@@ -11,7 +11,7 @@ const signInUser = () => {
   };
 const signOutUser = () =>
   new Promise((resolve, reject) => {
- getAuth.signOut().then(resolve).catch(reject);
+ auth.signOut().then(resolve).catch(reject);
   });
 
   export { signInUser, signOutUser }
