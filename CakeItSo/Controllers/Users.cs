@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CakeItSo.Models;
 using CakeItSo.Repos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace CakeItSo.Controllers
 {
@@ -28,6 +30,28 @@ namespace CakeItSo.Controllers
                 _userRepo.CreateUser(user);
                 return Ok(user);
             }
+        }
+    
+        [Authorize]
+        [HttpGet("Auth")]
+        public async Task<IActionResult> GetUserAuthStatus()
+        {
+            string userId = User.FindFirst(claim => claim.Type == "user_id").Value;
+            bool userexists = _userRepo.CheckUserExists(userId);
+            if (!userexists)
+            {
+                User userFromToken = new User()
+                {
+                    
+                    id = userId,
+                   
+                };
+
+                _userRepo.CreateUser(userFromToken);
+                return Ok();
+            }
+            User existingUser = _userRepo.GetUserById(userId);
+            return Ok(existingUser);
         }
 
     }

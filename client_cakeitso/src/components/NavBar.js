@@ -1,6 +1,9 @@
 import React from 'react'
-
+import {useNavigate } from 'react-router-dom'
+import { signOutUser } from '../auth/auth'
 export default function NavBar() {
+const navigate = useNavigate();
+
   return (
     <nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
@@ -26,7 +29,7 @@ export default function NavBar() {
             <a className="nav-link" href="/YourInfo">Your Info</a>
           </li>
         </ul>
-        <button className="danger">LogOut</button>
+        <button className="btn danger" onClick={signOutUser}>LogOut</button>
       </div>
     </div>
   </nav>
