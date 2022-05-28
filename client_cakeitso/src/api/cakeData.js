@@ -6,9 +6,15 @@ const baseURL = firebaseConfig.databaseURL;
 const getAllCakes = () =>
   new Promise((resolve, reject) => {
     axios
-      .get(`${baseURL}/customers`)
+      .get(`${baseURL}/cakes`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-
-  export default getAllCakes; 
+  const getCakesbyId = (id) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/cakes/${id}`)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
+      export { getAllCakes, getCakesbyId }; 
