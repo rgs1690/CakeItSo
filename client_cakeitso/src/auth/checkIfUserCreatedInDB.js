@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https:\\localhost:7678'
+const baseURL = 'https:\\localhost:7139/api'
  
 const checkUserCreatedInDB = async () => {
 		//get the token from sessionStorage like this
