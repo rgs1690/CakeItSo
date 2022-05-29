@@ -1,7 +1,6 @@
 import axios from 'axios';
-import firebaseConfig from '../apiKeys';
 
-const baseURL = firebaseConfig.databaseURL;
+const baseURL = 'https://localhost:7139/api';
 
 const getAllCakes = () =>
   new Promise((resolve, reject) => {

@@ -23,9 +23,9 @@ function App() {
             };
             setUser(userObj);
             sessionStorage.setItem("token", response.accessToken);
-
+            console.log(userObj.uid)
             checkUserCreatedInDB(response.accessToken);
-            navigate('/')
+            
         } else {
             setUser(false);
              
