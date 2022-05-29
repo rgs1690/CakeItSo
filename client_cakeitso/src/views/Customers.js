@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { getAllCustomers } from '../api/customerData';
 import CustomerCard from '../components/CustomerCard';
 
