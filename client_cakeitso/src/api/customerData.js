@@ -1,7 +1,7 @@
 import axios from 'axios';
-import firebaseConfig from '../apiKeys';
+import firebaseConfig from '../auth/apiKeys';
 
-const baseURL = firebaseConfig.databaseURL;
+const baseURL = 'https://localhost:7139/api';
 
 const getAllCustomers = () =>
   new Promise((resolve, reject) => {
