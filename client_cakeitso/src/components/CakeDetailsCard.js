@@ -1,7 +1,11 @@
 import React from "react";
 import Proptypes from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 export default function CakeDetailsCard({ cake }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/CustomerDetails/${cake.customerId}`);
+  }
   return (
     <div>
       <div className="card" style={{ width: "18rem" }}>
@@ -14,9 +18,8 @@ export default function CakeDetailsCard({ cake }) {
             Price Per Serving: ${cake.foodCostPerServing} <br />
             Total Cost: ${cake.totalCost}
           </p>
-          <a href="#" className="btn btn-primary">
-            View Customer Info
-          </a>
+          <button type='button' className="btn btn-primary" onClick={handleClick}>View Customer Info</button>
+          
           <a href="#" className="btn btn-primary">
             View Event Details
           </a>

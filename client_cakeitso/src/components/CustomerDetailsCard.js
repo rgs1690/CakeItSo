@@ -1,7 +1,12 @@
 import React from "react";
 import Proptypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomerDetailsCard({ customer }) {
+  const navigate = useNavigate();
+  const handleCustomerCakes = () => {
+    navigate(`/CustomerCakes/${customer.id}`)
+  }
   return (
     <>
 
@@ -14,7 +19,7 @@ export default function CustomerDetailsCard({ customer }) {
             <button type="button" class="btn btn-primary">
               Update Customer
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" onClick={handleCustomerCakes} class="btn btn-primary">
               View Their Cakes
             </button>
             <button type="button" class="btn btn-primary">
