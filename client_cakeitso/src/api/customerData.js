@@ -10,6 +10,13 @@ const getAllCustomers = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
+  const getCustomersByUserId = (userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/customers/user/${userId}`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  })
   const getCustomerbyId = (id) =>
   new Promise((resolve, reject) => {
     axios
@@ -17,4 +24,4 @@ const getAllCustomers = () =>
       .then((response) => resolve(response.data))
       .catch(reject);
   });
-      export { getAllCustomers, getCustomerbyId }; 
+      export { getAllCustomers, getCustomerbyId, getCustomersByUserId }; 

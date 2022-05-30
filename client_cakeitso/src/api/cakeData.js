@@ -9,6 +9,13 @@ const getAllCakes = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
+  const getCakesByUserId = (userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/cakes/user/${userId}`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  });
   const getCakebyId = (id) =>
   new Promise((resolve, reject) => {
     axios
@@ -16,4 +23,4 @@ const getAllCakes = () =>
       .then((response) => resolve(response.data))
       .catch(reject);
   });
-      export { getAllCakes, getCakebyId }; 
+      export { getAllCakes, getCakebyId, getCakesByUserId }; 

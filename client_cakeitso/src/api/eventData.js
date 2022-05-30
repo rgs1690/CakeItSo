@@ -9,7 +9,13 @@ const getAllEvents = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-
+  const getEventsByUserId = (userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/events/user/${userId}`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  });
   const getEventById = (id) => 
   new Promise((resolve, reject) => {
     axios
@@ -18,4 +24,4 @@ const getAllEvents = () =>
     .catch(reject);
   });
 
-  export { getAllEvents, getEventById };
+  export { getAllEvents, getEventById, getEventsByUserId };

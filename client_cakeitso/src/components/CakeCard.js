@@ -15,7 +15,7 @@ export default function CakeCard({ cake }) {
         <h5 className="card-title">{cake.name}</h5>
       <img src={cake.refImage} className="card-img-top" alt="cake" />
         <p className="card-text">
-          Cake Customer<br/>
+          {cake.customerName}<br/>
           Date of Event
         </p>
         <button type="button" onClick={handleClick} className="btn btn-primary">View Details</button>        
