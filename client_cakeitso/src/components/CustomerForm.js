@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { createCustomer, getCustomersByUserId } from "../api/customerData";
+import { createCustomer} from "../api/customerData";
+import getCurrentUsersUid from "../helpers/helpers";
 
-const currentUser = getCustomersByUserId();
+
 const initialState = {
-  userId: currentUser,
+  userId: "",
   name: "",
   phone: "",
   email: "",
@@ -14,7 +15,9 @@ const initialState = {
 export default function CustomerForm({ obj = {} }) {
   const [formInput, setFormInput] = useState(initialState);
   const navigate = useNavigate();
+  const currentUser = getCurrentUsersUid();
   useEffect(() => {
+    console.log(currentUser)
     if(obj.id) {
       setFormInput({
         id: obj.id,
@@ -29,7 +32,8 @@ export default function CustomerForm({ obj = {} }) {
   const resetForm = () => {
     setFormInput(initialState);
   };
- const handleChange = (e) => {
+
+  const handleChange = (e) => {
    setFormInput((prevState) => ({
      ...prevState, 
      [e.target.name]: e.target.value,
@@ -41,10 +45,10 @@ export default function CustomerForm({ obj = {} }) {
     console.log(obj.id);
   } else {
     createCustomer({
-      formInput
-
+      ...formInput,
+      userId: currentUser,
     }).then((id) => {
-      console.log(id)
+      
       resetForm(); 
       navigate(`/CakeForm/${id}`)
     })
@@ -61,7 +65,7 @@ export default function CustomerForm({ obj = {} }) {
       <input
         type="text"
         className="form-control"
-        value={formInput.cardNum || ""}
+        value={formInput.name || ""}
         aria-describedby="customer name"
         placeholder="Enter name"
         onChange={(e) => handleChange(e)}
@@ -75,7 +79,7 @@ export default function CustomerForm({ obj = {} }) {
       <input
         type="text"
         className="form-control"
-        value={formInput.expiration || ""}
+        value={formInput.phone || ""}
         placeholder="Enter Phone Number"
         onChange={(e) => handleChange(e)}
         name="phone"
@@ -88,7 +92,7 @@ export default function CustomerForm({ obj = {} }) {
       <input
         type="text"
         className="form-control"
-        value={formInput.nameOnCard || ""}
+        value={formInput.email || ""}
         placeholder="Enter Email"
         onChange={(e) => handleChange(e)}
         name="email"

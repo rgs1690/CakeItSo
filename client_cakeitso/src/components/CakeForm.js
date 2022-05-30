@@ -5,9 +5,9 @@ import getCurrentUsersUid from "../helpers/helpers";
 import { getCustomerbyId } from "../api/customerData";
 import { createCake } from "../api/cakeData";
 
-const currentUser = getCurrentUsersUid();
+
 const initialState = {
-  userId: currentUser,
+  userId: "",
   name: "",
   customerId: "",
   recipe: "",
@@ -19,10 +19,12 @@ const initialState = {
   supplyCosts: 0,
   refImage: "",
   totalCost: 0,
+  customerName: ""
 };
 export default function CakeForm(obj = {}) {
   const [formInput, setFormInput] = useState(initialState);
   const [customer, setCustomer] = useState({});
+  const currentUser = getCurrentUsersUid();
   const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function CakeForm(obj = {}) {
         supplyCosts: obj.supplyCosts,
         refImage: obj.refImage,
         totalCost: obj.totalCost,
+        customerName: obj.customerName,
       });
     }
   }, [obj]);
@@ -70,6 +73,7 @@ export default function CakeForm(obj = {}) {
       userId: currentUser,
       customerId: customer.id,
       totalCost: totalCost(), 
+      customerName: customer.name,
      }).then((id) => {
        console.log(id)
        resetForm(); 

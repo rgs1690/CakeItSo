@@ -30,5 +30,13 @@ const getAllEvents = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   })
-
-  export { getAllEvents, getEventById, getEventsByUserId, getEventsByCustomerId };
+  const createEvent = (newEvent) => 
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/events`, newEvent)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(reject);
+  });
+  export { getAllEvents, getEventById, getEventsByUserId, getEventsByCustomerId, createEvent };
