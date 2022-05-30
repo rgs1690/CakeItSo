@@ -30,6 +30,15 @@ const getCakesByCustomerId = (customerId) =>
       .get(`${baseURL}/cakes/customer/${customerId}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
-  })
+  });
+  const createCake = (newCake) => 
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/cakes`, newCake)
+      .then((response) => {
+        resolve(response.data.id);
+      })
+      .catch(reject);
+  });
 
-      export { getAllCakes, getCakebyId, getCakesByUserId, getCakesByCustomerId }; 
+      export { getAllCakes, getCakebyId, getCakesByUserId, getCakesByCustomerId, createCake }; 
