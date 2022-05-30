@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getAllEvents from '../api/eventData';
+import { getAllEvents } from '../api/eventData';
 import EventCard from '../components/EventCard';
 
 export default function Events() {

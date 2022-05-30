@@ -10,4 +10,12 @@ const getAllEvents = () =>
       .catch(reject);
   });
 
-  export default getAllEvents;
+  const getEventById = (id) => 
+  new Promise((resolve, reject) => {
+    axios
+    .get(`${baseURL}/events/${id}`)
+    .then((response) => resolve(response.data))
+    .catch(reject);
+  });
+
+  export { getAllEvents, getEventById };

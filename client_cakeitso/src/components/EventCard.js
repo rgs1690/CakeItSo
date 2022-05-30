@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom"; 
 export default function EventCard({ event }) {
   const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/EventDetails/${event.id}`)
+  }
   return (
     <div>
       <div class="card" style={{width: "18rem"}}>
@@ -13,7 +16,7 @@ export default function EventCard({ event }) {
       {event.date}<br/>
       {event.venu}
     </p>
-    <a href="#" class="card-link">View Details</a>
+    <button type="button" onClick={handleClick} className="btn btn-primary">View Details</button>
   </div>
 </div>
     </div>
