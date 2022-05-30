@@ -4,18 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 export default function CakeCard({ cake }) {
   const navigate = useNavigate();
+  const handleClick = () => {
+    console.log('CLICKED!')
+    navigate(`/CakeDetails/${cake.id}`)
+    console.log(cake.id)
+  };
   return (
-    <div class="card" style={{ width: "18rem" }}>
-      <div class="card-body">
-        <h5 class="card-title">{cake.name}</h5>
-      <img src={cake.refImage} class="card-img-top" alt="cake" />
-        <p class="card-text">
-          <p>Cake Customer</p><br/>
-          <p>Date of Event</p>
+    <div className="card" style={{ width: "18rem" }}>
+      <div className="card-body">
+        <h5 className="card-title">{cake.name}</h5>
+      <img src={cake.refImage} className="card-img-top" alt="cake" />
+        <p className="card-text">
+          Cake Customer<br/>
+          Date of Event
         </p>
-        <a href="#" class="btn btn-primary">
-          View Details
-        </a>
+        <button type="button" onClick={handleClick} className="btn btn-primary">View Details</button>        
       </div>
     </div>
   );

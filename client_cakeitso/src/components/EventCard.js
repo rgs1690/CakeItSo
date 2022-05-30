@@ -13,7 +13,7 @@ export default function EventCard({ event }) {
       {event.date}<br/>
       {event.venu}
     </p>
-    <a href="#" class="card-link">View Details</a>
+    <a href="#" className="card-link">View Details</a>
   </div>
 </div>
     </div>
