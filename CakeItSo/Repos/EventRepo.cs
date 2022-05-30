@@ -72,9 +72,10 @@ namespace CakeItSo.Repos
                 {
                     cmd.CommandText = @"
                                       SELECT 
-                                      Event.id AS EventId, Event.[name] AS EventName, Event.userId As EventUser, customerId, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice, Customer.[name] AS customerName
+                                      Event.id AS EventId, Event.[name] AS EventName, Event.userId As EventUser, Event.customerId As EventCustomer, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice, Customer.[name] AS customerName, Cake.[name] As CakeName, Cake.totalCost AS cakeCost
                                       FROM Event
                                       LEFT JOIN Customer ON Customer.id = Event.customerId
+                                      LEFT JOIN Cake ON Cake.id = Event.cakeId
                                         WHERE Event.Id = @Id
                                       ";
 
@@ -89,7 +90,7 @@ namespace CakeItSo.Repos
                             id = reader.GetInt32(reader.GetOrdinal("EventId")),
                             name = reader.GetString(reader.GetOrdinal("EventName")),
                             userId = reader.GetString(reader.GetOrdinal("EventUser")),
-                            customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
+                            customerId = reader.GetInt32(reader.GetOrdinal("EventCustomer")),
                             cakeId = reader.GetInt32(reader.GetOrdinal("cakeId")),
                             typeOfEvent = reader.GetString(reader.GetOrdinal("typeOfEvent")),
                             venu = reader.GetString(reader.GetOrdinal("venu")),
@@ -102,6 +103,8 @@ namespace CakeItSo.Repos
                             notes = reader.GetString(reader.GetOrdinal("notes")),
                             totalPrice = reader.GetDecimal(reader.GetOrdinal("totalPrice")),
                             customerName = reader.GetString(reader.GetOrdinal("customerName")),
+                            cakeName = reader.GetString(reader.GetOrdinal("cakeName")),
+                            cakeCost = reader.GetDecimal(reader.GetOrdinal("cakeCost")),
                         };
 
                         reader.Close();

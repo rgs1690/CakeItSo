@@ -18,5 +18,7 @@
         public string notes { get; set; }
         public decimal totalPrice {get; set;}
         public string customerName { get; set; }
+        public string cakeName { get; set; }
+        public decimal cakeCost { get; set;}
 }
 }
