@@ -17,5 +17,6 @@
         public decimal pricePerMile { get; set; }
         public string notes { get; set; }
         public decimal totalPrice {get; set;}
+        public string customerName { get; set; }
 }
 }
