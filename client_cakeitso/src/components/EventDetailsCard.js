@@ -1,7 +1,38 @@
-import React from 'react'
+import React from 'react';
+import Proptypes from "prop-types";
 
-export default function EventDetailsCard() {
+export default function EventDetailsCard({ event }) {
   return (
-    <div>EventDetailsCard</div>
+    <div>
+      <div class="card" style={{width: "18rem"}}>
+  <div class="card-body">
+    <h5 class="card-title">{event.name}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{event.date}</li>
+    <li class="list-group-item">Customer Name</li>
+    <li class="list-group-item">Cake Name</li>
+    <li class="list-group-item">{event.typeOfEvent}</li>
+  </ul>
+  <h5 class="card-title">Venu Info</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{event.venu}</li>
+    <li class="list-group-item">{event.venuPhone}</li>
+    <li class="list-group-item">{event.venuAddress}</li>
+    <li class="list-group-item">{event.miles}</li>
+  </ul>
+    <p class="card-text">{event.notes}</p>
+  <div class="card-body">
+    <a href="#" class="card-link">View Customer Info</a>
+    <a href="#" class="card-link">View Cake Details</a>
+    <a href="#" class="card-link">Update Event</a>
+    <a href="#" class="card-link">Delete Event</a>
+  </div>
+</div>
+
   )
 }
+EventDetailsCard.propTypes = {
+  event: Proptypes.shape({}),
+};
