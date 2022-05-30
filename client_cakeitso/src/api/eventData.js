@@ -23,5 +23,12 @@ const getAllEvents = () =>
     .then((response) => resolve(response.data))
     .catch(reject);
   });
+  const getEventsByCustomerId = (customerId) => 
+  new Promise((resolve, reject) => {
+    axios 
+      .get(`${baseURL}/events/customer/${customerId}`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  })
 
-  export { getAllEvents, getEventById, getEventsByUserId };
+  export { getAllEvents, getEventById, getEventsByUserId, getEventsByCustomerId };
