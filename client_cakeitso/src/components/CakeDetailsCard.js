@@ -7,12 +7,12 @@ export default function CakeDetailsCard({ cake }) {
       <div className="card" style={{ width: "18rem" }}>
         <img src={cake.refImage} className="card-img-top" alt="cake" />
         <div className="card-body">
-          <h5 className={cake.name}>Card title</h5>
+          <h5 className={cake.name}>{cake.name}</h5>
           <p className="card-text">
-            cake date <br />
-            {cake.recipe} <br />
-            {cake.pricePerServing} <br />
-            total Price
+            Customer: {cake.customerName} <br/>
+            Recipe: {cake.recipe} <br />
+            Price Per Serving: ${cake.foodCostPerServing} <br />
+            Total Cost: ${cake.totalCost}
           </p>
           <a href="#" className="btn btn-primary">
             View Customer Info
