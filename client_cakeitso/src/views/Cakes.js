@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { getAllCakes } from '../api/cakeData';
+import  { getCakesByUserId } from '../api/cakeData';
 import CakeCard from '../components/CakeCard'
+import getCurrentUsersUid from '../helpers/helpers';
 export default function Cakes() {
   const [cakes, setCakes] = useState();
+  const currentUid = getCurrentUsersUid();
   useEffect(() => {
-    getAllCakes().then((cakeArray) => {
+    console.log(currentUid)
+    getCakesByUserId(currentUid).then((cakeArray) => {
       setCakes(cakeArray);
     });
   }, [])

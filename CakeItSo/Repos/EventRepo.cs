@@ -71,10 +71,12 @@ namespace CakeItSo.Repos
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                       SELECT 
-                                      id, [name], userId, customerId, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice
+                                      SELECT 
+                                      Event.id AS EventId, Event.[name] AS EventName, Event.userId As EventUser, Event.customerId As EventCustomer, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice, Customer.[name] AS customerName, Cake.[name] As CakeName, Cake.totalCost AS cakeCost
                                       FROM Event
-                                        WHERE Id = @Id
+                                      LEFT JOIN Customer ON Customer.id = Event.customerId
+                                      LEFT JOIN Cake ON Cake.id = Event.cakeId
+                                        WHERE Event.Id = @Id
                                       ";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -85,10 +87,10 @@ namespace CakeItSo.Repos
                     {
                         Event selectedEvent = new Event()
                         {
-                            id = reader.GetInt32(reader.GetOrdinal("id")),
-                            name = reader.GetString(reader.GetOrdinal("name")),
-                            userId = reader.GetString(reader.GetOrdinal("userId")),
-                            customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
+                            id = reader.GetInt32(reader.GetOrdinal("EventId")),
+                            name = reader.GetString(reader.GetOrdinal("EventName")),
+                            userId = reader.GetString(reader.GetOrdinal("EventUser")),
+                            customerId = reader.GetInt32(reader.GetOrdinal("EventCustomer")),
                             cakeId = reader.GetInt32(reader.GetOrdinal("cakeId")),
                             typeOfEvent = reader.GetString(reader.GetOrdinal("typeOfEvent")),
                             venu = reader.GetString(reader.GetOrdinal("venu")),
@@ -100,6 +102,9 @@ namespace CakeItSo.Repos
                             pricePerMile = reader.GetDecimal(reader.GetOrdinal("pricePerMile")),
                             notes = reader.GetString(reader.GetOrdinal("notes")),
                             totalPrice = reader.GetDecimal(reader.GetOrdinal("totalPrice")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName")),
+                            cakeName = reader.GetString(reader.GetOrdinal("cakeName")),
+                            cakeCost = reader.GetDecimal(reader.GetOrdinal("cakeCost")),
                         };
 
                         reader.Close();
@@ -120,9 +125,10 @@ namespace CakeItSo.Repos
                 {
                     cmd.CommandText = @"
 			                       SELECT 
-                                      id, [name], userId, customerId, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice
+                                      Event.id AS EventId, Event.[name] AS EventName, Event.userId As EventUser, customerId, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice, Customer.[name] AS customerName
                                       FROM Event
-                                    WHERE UserId = @userId
+                                      LEFT JOIN Customer ON Customer.id = Event.customerId     
+                                    WHERE Event.UserId = @userId
 			";
                     cmd.Parameters.AddWithValue("@userId", userId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -132,9 +138,9 @@ namespace CakeItSo.Repos
                     {
                         Event selectedEvent = new Event()
                         {
-                            id = reader.GetInt32(reader.GetOrdinal("id")),
-                            name = reader.GetString(reader.GetOrdinal("name")),
-                            userId = reader.GetString(reader.GetOrdinal("userId")),
+                            id = reader.GetInt32(reader.GetOrdinal("EventId")),
+                            name = reader.GetString(reader.GetOrdinal("EventName")),
+                            userId = reader.GetString(reader.GetOrdinal("EventUser")),
                             customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
                             cakeId = reader.GetInt32(reader.GetOrdinal("cakeId")),
                             typeOfEvent = reader.GetString(reader.GetOrdinal("typeOfEvent")),
@@ -147,6 +153,7 @@ namespace CakeItSo.Repos
                             pricePerMile = reader.GetDecimal(reader.GetOrdinal("pricePerMile")),
                             notes = reader.GetString(reader.GetOrdinal("notes")),
                             totalPrice = reader.GetDecimal(reader.GetOrdinal("totalPrice")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName"))
                         };
                         events.Add(selectedEvent);
                     }

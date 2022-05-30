@@ -11,7 +11,7 @@ export default function EventCard({ event }) {
       <div class="card" style={{width: "18rem"}}>
   <div class="card-body">
     <h5 class="card-title">{event.name}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Customer Name</h6>
+    <h6 class="card-subtitle mb-2 text-muted">{event.customerName}</h6>
     <p class="card-text">
       {event.date}<br/>
       {event.venu}

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getAllEvents } from '../api/eventData';
+import { getAllEvents, getEventsByUserId } from '../api/eventData';
 import EventCard from '../components/EventCard';
+import getCurrentUsersUid from '../helpers/helpers';
 
 export default function Events() {
   const [events, setEvents] = useState();
-
+  const currentUser = getCurrentUsersUid();
   useEffect(() => {
-    getAllEvents().then((eventArray) => {
+    getEventsByUserId(currentUser).then((eventArray) => {
       setEvents(eventArray);
     });
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getAllCustomers } from '../api/customerData';
+import { getCustomersByUserId } from '../api/customerData';
 import CustomerCard from '../components/CustomerCard';
+import getCurrentUsersUid from '../helpers/helpers';
 
 export default function Customers() {
 const [customers, setCustomers] = useState();
-
+const currentUser = getCurrentUsersUid();
 useEffect(() => {
-  getAllCustomers().then((array) => {
+  getCustomersByUserId(currentUser).then((array) => {
     setCustomers(array);
   });
 

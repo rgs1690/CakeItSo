@@ -70,9 +70,10 @@ namespace CakeItSo.Repos
                 {
                     cmd.CommandText = @"
                                        SELECT 
-                                       id, [name], customerId, recipe, userId, foodCostPerServing, numOfGuests, decorTime, bakeTime, wagePerHour, supplyCost, refImage, totalCost
+                                        Cake.id AS CAKEId, Cake.[name] AS CAKEName, customerId, recipe, Cake.userId AS CakeUser, foodCostPerServing, numOfGuests, decorTime, bakeTime, wagePerHour, supplyCost, refImage, totalCost,  Customer.[name] AS customerName
                                       FROM Cake
-                                      WHERE Id = @Id
+                                      LEFT JOIN Customer ON Customer.id = Cake.customerId  
+                                      WHERE Cake.Id = @Id
                                       ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -83,10 +84,10 @@ namespace CakeItSo.Repos
                         Cake cake = new Cake()
                         {
 
-                            id = reader.GetInt32(reader.GetOrdinal("id")),
-                            name = reader.GetString(reader.GetOrdinal("name")),
+                            id = reader.GetInt32(reader.GetOrdinal("CakeId")),
+                            name = reader.GetString(reader.GetOrdinal("CAKEName")),
                             customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
-                            userId = reader.GetString(reader.GetOrdinal("userId")),
+                            userId = reader.GetString(reader.GetOrdinal("CakeUser")),
                             recipe = reader.GetString(reader.GetOrdinal("recipe")),
                             foodCostPerServing = reader.GetDecimal(reader.GetOrdinal("foodCostPerServing")),
                             numOfGuests = reader.GetInt32(reader.GetOrdinal("numOfGuests")),
@@ -95,7 +96,8 @@ namespace CakeItSo.Repos
                             wagePerHour = reader.GetDecimal(reader.GetOrdinal("wagePerHour")),
                             supplyCost = reader.GetDecimal(reader.GetOrdinal("supplyCost")),
                             refImage = reader.GetString(reader.GetOrdinal("refImage")),
-                            totalCost = reader.GetDecimal(reader.GetOrdinal("totalCost"))
+                            totalCost = reader.GetDecimal(reader.GetOrdinal("totalCost")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName"))
                         };
 
                         reader.Close();
@@ -116,9 +118,10 @@ namespace CakeItSo.Repos
                 {
                     cmd.CommandText = @"
 			                        SELECT 
-                                       id, [name], customerId, recipe, userId, foodCostPerServing, numOfGuests, decorTime, bakeTime, wagePerHour, supplyCost, refImage, totalCost
-                                      FROM Cake
-                                    WHERE UserId = @userId
+                                       Cake.id AS CAKEId, Cake.[name] AS CAKEName, customerId, recipe, Cake.userId AS CAKEuser, foodCostPerServing, numOfGuests, decorTime, bakeTime, wagePerHour, supplyCost, refImage, totalCost, Customer.[name] AS customerName
+                                    FROM Cake
+                                    LEFT JOIN Customer ON Customer.id = Cake.customerId  
+                                    WHERE Cake.UserId = @userId
 			";
                     cmd.Parameters.AddWithValue("@userId", userId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -128,10 +131,10 @@ namespace CakeItSo.Repos
                     {
                         Cake cake = new Cake()
                         {
-                            id = reader.GetInt32(reader.GetOrdinal("id")),
-                            name = reader.GetString(reader.GetOrdinal("name")),
+                            id = reader.GetInt32(reader.GetOrdinal("CAKEId")),
+                            name = reader.GetString(reader.GetOrdinal("CAKEName")),
                             customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
-                            userId = reader.GetString(reader.GetOrdinal("userId")),
+                            userId = reader.GetString(reader.GetOrdinal("Cakeuser")),
                             recipe = reader.GetString(reader.GetOrdinal("recipe")),
                             foodCostPerServing = reader.GetDecimal(reader.GetOrdinal("foodCostPerServing")),
                             numOfGuests = reader.GetInt32(reader.GetOrdinal("numOfGuests")),
@@ -141,6 +144,7 @@ namespace CakeItSo.Repos
                             supplyCost = reader.GetDecimal(reader.GetOrdinal("supplyCost")),
                             refImage = reader.GetString(reader.GetOrdinal("refImage")),
                             totalCost = reader.GetDecimal(reader.GetOrdinal("totalCost")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName"))
                         };
                         cakes.Add(cake);
                     }

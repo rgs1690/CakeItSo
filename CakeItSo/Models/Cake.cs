@@ -15,5 +15,6 @@
         public decimal supplyCost { get; set; }
         public string refImage { get; set; }
         public decimal totalCost { get; set; }
+        public string customerName { get; set; }
     }
 }
