@@ -13,7 +13,7 @@ export default function EventDetailsCard({ event }) {
     <li class="list-group-item">Customer: {event.customerName}</li>
     <li class="list-group-item">Cake for Event: {event.cakeName}</li>
     <li class="list-group-item">Type: {event.typeOfEvent}</li>
-    <li class="list-group-item">Total Price for Event </li>
+    <li class="list-group-item">Total: ${event.totalPrice} </li>
   </ul>
   <h5 class="card-title">Venu Info</h5>
   </div>

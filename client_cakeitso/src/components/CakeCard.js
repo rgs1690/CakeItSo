@@ -16,7 +16,6 @@ export default function CakeCard({ cake }) {
       <img src={cake.refImage} className="card-img-top" alt="cake" />
         <p className="card-text">
           {cake.customerName}<br/>
-          Date of Event
         </p>
         <button type="button" onClick={handleClick} className="btn btn-primary">View Details</button>        
       </div>

@@ -24,4 +24,13 @@ const getAllCustomers = () =>
       .then((response) => resolve(response.data))
       .catch(reject);
   });
-      export { getAllCustomers, getCustomerbyId, getCustomersByUserId }; 
+  const createCustomer = (newCustomer) => 
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/customers`, newCustomer)
+      .then((response) => {
+        resolve(response.data.id);
+      })
+      .catch(reject);
+  });
+      export { getAllCustomers, getCustomerbyId, getCustomersByUserId, createCustomer }; 
