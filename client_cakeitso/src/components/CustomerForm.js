@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { createCustomer} from "../api/customerData";
+import { createCustomer, updateCustomer} from "../api/customerData";
 import getCurrentUsersUid from "../helpers/helpers";
 
 
@@ -42,7 +42,10 @@ export default function CustomerForm({ obj = {} }) {
  const handleClick = (e) => {
    e.preventDefault();
   if(obj.id){
-    console.log(obj.id);
+    updateCustomer(formInput).then(() => {
+      console.log(formInput);
+      navigate(`/CustomerDetails/${obj.id}`)
+    })
   } else {
     createCustomer({
       ...formInput,

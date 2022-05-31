@@ -7,6 +7,9 @@ export default function CustomerDetailsCard({ customer }) {
   const handleCustomerCakes = () => {
     navigate(`/CustomerCakes/${customer.id}`)
   }
+  const handleUpdate = () => {
+    navigate(`/EditCustomer/${customer.id}`)
+  }
   return (
     <>
 
@@ -16,7 +19,7 @@ export default function CustomerDetailsCard({ customer }) {
             <h5 class="card-title">{customer.name}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{customer.phone}</h6>
             <h6 class="card-subtitle mb-2 text-muted">{customer.email}</h6>
-            <button type="button" class="btn btn-primary">
+            <button type="button" onClick={handleUpdate} class="btn btn-primary">
               Update Customer
             </button>
             <button type="button" onClick={handleCustomerCakes} class="btn btn-primary">

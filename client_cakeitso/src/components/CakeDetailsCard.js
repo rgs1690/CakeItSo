@@ -5,6 +5,9 @@ export default function CakeDetailsCard({ cake }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/CustomerDetails/${cake.customerId}`);
+  };
+  const handleUpdate = () => {
+    navigate(`/EditCake/${cake.id}`)
   }
   return (
     <div>
@@ -23,9 +26,9 @@ export default function CakeDetailsCard({ cake }) {
           <a href="#" className="btn btn-primary">
             View Event Details
           </a>
-          <a href="#" className="btn btn-primary">
+          <button onClick={handleUpdate} className="btn btn-primary">
             Update Cake
-          </a>
+          </button>
           <a href="#" className="btn btn-primary">
             Delete Cake
           </a>
