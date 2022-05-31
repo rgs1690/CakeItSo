@@ -77,7 +77,7 @@ export default function CakeForm(obj = {}) {
         cakeId: cake.id,
         totalPrice: totalPrice(),
         cakeName: cake.name,
-        customerName: customer.name
+        customerName: customer.name,
       }).then(() => {
         resetForm();
         navigate(`/Events`);
