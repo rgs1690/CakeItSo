@@ -62,7 +62,7 @@ export default function EditCakeForm({obj = {}}) {
     const answer = (formInput.foodCostPerServing * formInput.numOfGuests)
      + 
     ((formInput.bakeTime + formInput.decorTime) * formInput.wagePerHour)
-    + formInput.supplyCosts; 
+    + formInput.supplyCost; 
     return answer; 
   }
   const handleClick = (e) => {
@@ -176,7 +176,7 @@ export default function EditCakeForm({obj = {}}) {
         value={formInput.supplyCost || ""}
         placeholder="Enter extra supply costs"
         onChange={(e) => handleChange(e)}
-        name="supplyCosts"
+        name="supplyCost"
       />
     </div>
     <div className="form-group">

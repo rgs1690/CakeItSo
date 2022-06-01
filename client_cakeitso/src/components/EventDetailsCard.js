@@ -1,7 +1,12 @@
 import React from 'react';
 import Proptypes from "prop-types";
-
+import { useNavigate } from 'react-router-dom';
 export default function EventDetailsCard({ event }) {
+  const navigate = useNavigate();
+  const handleUpdate = () => {
+    navigate(`/EditEvent/${event.id}`)
+  }
+  
   return (
     <div>
       <div class="card" style={{width: "18rem"}}>
@@ -25,10 +30,10 @@ export default function EventDetailsCard({ event }) {
   </ul>
     <p class="card-text">Notes: {event.notes}</p>
   <div class="card-body">
-    <a href="#" class="card-link">View Customer Info</a>
-    <a href="#" class="card-link">View Cake Details</a>
-    <a href="#" class="card-link">Update Event</a>
-    <a href="#" class="card-link">Delete Event</a>
+    <button type="button" class="btn btn-primary">View Customer Info</button>
+    <button type="button" class="btn btn-primary">View Cake Details</button>
+    <button type="button" onClick={handleUpdate} class="btn btn-primary">Update Event</button>
+    <button type="button" class="btn btn-primary">Delete Event</button>
   </div>
 </div>
 

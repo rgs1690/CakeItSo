@@ -42,7 +42,7 @@ const createEvent = (newEvent) =>
 const updateEvent = (eventObj) =>
   new Promise((resolve, reject) => {
     axios
-      .put(`${baseURL}/customers/${eventObj.id}`, eventObj)
+      .put(`${baseURL}/events/${eventObj.id}`, eventObj)
       .then(() => getEventsByUserId(eventObj.userId).then(resolve))
       .catch(reject);
   });

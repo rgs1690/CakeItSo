@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getEventById } from '../api/eventData';
-import EventForm from './EventForm';
+import EditEventForm from '../components/EditEventForm';
 
 export default function EditEvent() {
     const [editEvent, setEditEvent] = useState();
@@ -12,7 +12,7 @@ useEffect(() => {
 
   return (
     <div>
-        <EventForm obj={editEvent} />
+        <EditEventForm obj={editEvent} />
     </div>
   )
 }

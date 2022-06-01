@@ -65,7 +65,7 @@ export default function CakeForm(obj = {}) {
     const answer = (formInput.foodCostPerServing * formInput.numOfGuests)
      + 
     ((formInput.bakeTime + formInput.decorTime) * formInput.wagePerHour)
-    + formInput.supplyCosts; 
+    + formInput.supplyCost; 
     return answer; 
   }
   const handleClick = (e) => {
