@@ -7,6 +7,7 @@ export default function CakeDetailsCard({ cake }) {
     navigate(`/CustomerDetails/${cake.customerId}`);
   };
   const handleUpdate = () => {
+    
     navigate(`/EditCake/${cake.id}`)
   }
   return (

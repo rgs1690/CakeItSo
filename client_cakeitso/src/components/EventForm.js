@@ -21,7 +21,7 @@ const initialState = {
   notes: "",
   totalPrice: 0,
 };
-export default function CakeForm(obj = {}) {
+export default function EventForm(obj = {}) {
   const [formInput, setFormInput] = useState(initialState);
   const [cake, setCake] = useState({});
   const [customer, setCustomer ] = useState({});

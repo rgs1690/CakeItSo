@@ -21,12 +21,11 @@ const initialState = {
   totalCost: 0,
   customerName: ""
 };
-export default function CakeForm(obj = {}) {
+export default function EditCakeForm({obj = {}}) {
   const [formInput, setFormInput] = useState(initialState);
   const [customer, setCustomer] = useState({});
   const currentUser = getCurrentUsersUid();
   const navigate = useNavigate();
-  const { id } = useParams();
   useEffect(() => {
     
     if (obj.id) {
@@ -42,15 +41,13 @@ export default function CakeForm(obj = {}) {
         decorTime: obj.decorTime,
         bakeTime: obj.bakeTime,
         wagePerHour: obj.wagePerHour,
-        supplyCosts: obj.supplyCosts,
+        supplyCost: obj.supplyCost,
         refImage: obj.refImage,
         totalCost: obj.totalCost,
         customerName: obj.customerName,
       });
     }
-    else {
-      getCustomerbyId(id).then(setCustomer);
-    }
+  
   }, [obj]);
   const resetForm = () => {
     setFormInput(initialState);
@@ -70,25 +67,15 @@ export default function CakeForm(obj = {}) {
   }
   const handleClick = (e) => {
     e.preventDefault();
-   if(obj.id){
-     updateCake(formInput).then(() => {
+
+     updateCake({...formInput,
+        totalCost: totalCost(), 
+    }).then(() => {
        console.log(formInput);
        navigate(`/CakeDetails/${obj.id}`)
-     })
-   } else {
-     createCake({
-       ...formInput,
-      userId: currentUser,
-      customerId: customer.id,
-      totalCost: totalCost(), 
-      customerName: customer.name,
-     }).then((id) => {
-       console.log(id)
-       resetForm(); 
-       navigate(`/EventForm/${id}`)
-     })
-   }
- 
+     
+   })
+
   }
   return (
   
@@ -186,7 +173,7 @@ export default function CakeForm(obj = {}) {
       <input
         type="text"
         className="form-control"
-        value={formInput.supplyCosts || ""}
+        value={formInput.supplyCost || ""}
         placeholder="Enter extra supply costs"
         onChange={(e) => handleChange(e)}
         name="supplyCosts"
@@ -206,7 +193,7 @@ export default function CakeForm(obj = {}) {
     </div>
 
     <button type="submit" className="btn btn-primary">
-      {obj.id ? "Update Cake" : "Add Cake"}
+      Update Cake
     </button>
   </form>
 
