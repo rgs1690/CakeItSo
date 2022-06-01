@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'https://localhost:7139/api';
+const baseURL = "https://localhost:7139/api";
 
 const getAllEvents = () =>
   new Promise((resolve, reject) => {
@@ -9,28 +9,28 @@ const getAllEvents = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-  const getEventsByUserId = (userId) => 
+const getEventsByUserId = (userId) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/events/user/${userId}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-  const getEventById = (id) => 
+const getEventById = (id) =>
   new Promise((resolve, reject) => {
     axios
-    .get(`${baseURL}/events/${id}`)
-    .then((response) => resolve(response.data))
-    .catch(reject);
+      .get(`${baseURL}/events/${id}`)
+      .then((response) => resolve(response.data))
+      .catch(reject);
   });
-  const getEventsByCustomerId = (customerId) => 
+const getEventsByCustomerId = (customerId) =>
   new Promise((resolve, reject) => {
-    axios 
+    axios
       .get(`${baseURL}/events/customer/${customerId}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
-  })
-  const createEvent = (newEvent) => 
+  });
+const createEvent = (newEvent) =>
   new Promise((resolve, reject) => {
     axios
       .post(`${baseURL}/events`, newEvent)
@@ -39,4 +39,19 @@ const getAllEvents = () =>
       })
       .catch(reject);
   });
-  export { getAllEvents, getEventById, getEventsByUserId, getEventsByCustomerId, createEvent };
+const updateEvent = (eventObj) =>
+  new Promise((resolve, reject) => {
+    axios
+      .put(`${baseURL}/events/${eventObj.id}`, eventObj)
+      .then(() => getEventsByUserId(eventObj.userId).then(resolve))
+      .catch(reject);
+  });
+
+export {
+  getAllEvents,
+  getEventById,
+  getEventsByUserId,
+  getEventsByCustomerId,
+  createEvent,
+  updateEvent,
+};

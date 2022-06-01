@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'https://localhost:7139/api';
+const baseURL = "https://localhost:7139/api";
 
 const getAllCakes = () =>
   new Promise((resolve, reject) => {
@@ -9,14 +9,14 @@ const getAllCakes = () =>
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-  const getCakesByUserId = (userId) => 
+const getCakesByUserId = (userId) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/cakes/user/${userId}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-  const getCakebyId = (id) =>
+const getCakebyId = (id) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/cakes/${id}`)
@@ -24,14 +24,14 @@ const getAllCakes = () =>
       .catch(reject);
   });
 
-const getCakesByCustomerId = (customerId) => 
+const getCakesByCustomerId = (customerId) =>
   new Promise((resolve, reject) => {
-    axios 
+    axios
       .get(`${baseURL}/cakes/customer/${customerId}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });
-  const createCake = (newCake) => 
+const createCake = (newCake) =>
   new Promise((resolve, reject) => {
     axios
       .post(`${baseURL}/cakes`, newCake)
@@ -40,5 +40,19 @@ const getCakesByCustomerId = (customerId) =>
       })
       .catch(reject);
   });
+const updateCake = (cakeObj) =>
+  new Promise((resolve, reject) => {
+    axios
+      .put(`${baseURL}/cakes/${cakeObj.id}`, cakeObj)
+      .then(() => getCakesByUserId(cakeObj.userId).then(resolve))
+      .catch(reject);
+  });
 
-      export { getAllCakes, getCakebyId, getCakesByUserId, getCakesByCustomerId, createCake }; 
+export {
+  getAllCakes,
+  getCakebyId,
+  getCakesByUserId,
+  getCakesByCustomerId,
+  createCake,
+  updateCake,
+};

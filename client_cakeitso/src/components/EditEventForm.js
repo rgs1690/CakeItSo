@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
 import getCurrentUsersUid from "../helpers/helpers";
 import { getCakebyId } from "../api/cakeData";
-import { createEvent } from "../api/eventData";
+import { createEvent, updateEvent } from "../api/eventData";
 import {getCustomerbyId } from "../api/customerData";
 const initialState = {
   userId: "",
@@ -21,18 +21,19 @@ const initialState = {
   notes: "",
   totalPrice: 0,
 };
-export default function EventForm(obj = {}) {
+export default function EditEventForm({obj = {}}) {
   const [formInput, setFormInput] = useState(initialState);
   const [cake, setCake] = useState({});
   const [customer, setCustomer ] = useState({});
   const navigate = useNavigate();
   const currentUser = getCurrentUsersUid();
-  const { id } = useParams();
+
   useEffect(() => {
-    getCakebyId(id).then(setCake);
-    getCustomerbyId(cake.customerId).then(setCustomer);
-    if (obj.id) {
+      if (obj.id) {
+    getCakebyId(obj.cakeId).then(setCake);
+    getCustomerbyId(obj.customerId).then(setCustomer);
       setFormInput({
+          id: obj.id,
         userId: obj.userId,
         name: obj.name,
         customerId: obj.customerId,
@@ -50,7 +51,7 @@ export default function EventForm(obj = {}) {
         cakeName: obj.cakeName,
         customerName: obj.customerName
       });
-    }
+      }
   }, [obj]);
   const resetForm = () => {
     setFormInput(initialState);
@@ -67,23 +68,14 @@ export default function EventForm(obj = {}) {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    if (obj.id) {
-      console.log(obj.id);
-    } else {
-      createEvent({
-        ...formInput,
-        userId: currentUser,
-        customerId: cake.customerId,
-        cakeId: cake.id,
+    updateEvent({...formInput,
         totalPrice: totalPrice(),
-        cakeName: cake.name,
-        customerName: customer.name,
-      }).then(() => {
-        resetForm();
-        navigate(`/Events`);
-      });
-    }
-  };
+    }).then(() => {
+        navigate(`/EventDetails/${obj.id}`)
+    })
+      
+    };
+  
   return (
     <div>
       <form onSubmit={(e) => handleClick(e)}>
@@ -212,7 +204,7 @@ export default function EventForm(obj = {}) {
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          {obj.id ? "Update Event" : "Add Event"}
+          Update Event
         </button>
       </form>
     </div>
