@@ -1,12 +1,26 @@
 import React from 'react';
 import Proptypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
+import { deleteEvent, getEventsByUserId } from '../api/eventData';
 export default function EventDetailsCard({ event }) {
   const navigate = useNavigate();
   const handleUpdate = () => {
     navigate(`/EditEvent/${event.id}`)
   }
-  
+  const handleDelete = () => {
+    console.log(event.id)
+    deleteEvent(event.id).then(() => {
+      getEventsByUserId(event.userId).then(() => {
+        navigate(`/events`)
+      })
+    })
+  }
+  const handleCustomer = () => {
+    navigate(`/CustomerDetails/${event.customerId}`)
+  }
+  const handleCake = () => {
+    navigate(`/CakeDetails/${event.cakeId}`)
+  }
   return (
     <div>
       <div class="card" style={{width: "18rem"}}>
@@ -30,10 +44,10 @@ export default function EventDetailsCard({ event }) {
   </ul>
     <p class="card-text">Notes: {event.notes}</p>
   <div class="card-body">
-    <button type="button" class="btn btn-primary">View Customer Info</button>
-    <button type="button" class="btn btn-primary">View Cake Details</button>
+    <button type="button" onClick={handleCustomer} class="btn btn-primary">View Customer Info</button>
+    <button type="button" onClick={handleCake}class="btn btn-primary">View Cake Details</button>
     <button type="button" onClick={handleUpdate} class="btn btn-primary">Update Event</button>
-    <button type="button" class="btn btn-primary">Delete Event</button>
+    <button type="button" onClick={handleDelete} class="btn btn-primary">Delete Event</button>
   </div>
 </div>
 

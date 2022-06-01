@@ -1,4 +1,5 @@
 import axios from "axios";
+import { deleteCake } from "./cakeData";
 
 const baseURL = "https://localhost:7139/api";
 
@@ -46,7 +47,30 @@ const updateEvent = (eventObj) =>
       .then(() => getEventsByUserId(eventObj.userId).then(resolve))
       .catch(reject);
   });
+  const deleteEvent = ( id, userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseURL}/events/${id}`)
+      .then(() => getEventsByUserId(userId).then(resolve))
+      .catch(reject);
+  });
+  const getEventsByCakeId = (cakeId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/events/cake/${cakeId}`)
+      .then((response) => resolve(Object.values(response.data))) 
+      .catch(reject);
+  });
 
+  const deleteEventsWithCakeId = (cakeId, userId) => 
+  new Promise((resolve, reject) => [
+    getEventsByCakeId(cakeId).then((eventArray) => {
+      console.log(cakeId, eventArray);
+      const deleteEvents = eventArray.map(((event) => deleteEvent(userId, event.id)));
+    Promise.all(deleteEvents).then(() => resolve(deleteCake(cakeId, userId)))
+    })
+    .catch(reject)
+  ]); 
 export {
   getAllEvents,
   getEventById,
@@ -54,4 +78,7 @@ export {
   getEventsByCustomerId,
   createEvent,
   updateEvent,
+  deleteEvent, 
+  deleteEventsWithCakeId, 
+  getEventsByCakeId
 };

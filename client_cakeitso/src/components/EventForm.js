@@ -30,27 +30,10 @@ export default function EventForm(obj = {}) {
   const { id } = useParams();
   useEffect(() => {
     getCakebyId(id).then(setCake);
-    getCustomerbyId(cake.customerId).then(setCustomer);
-    if (obj.id) {
-      setFormInput({
-        userId: obj.userId,
-        name: obj.name,
-        customerId: obj.customerId,
-        cakeId: obj.cakeId,
-        typeOfEvent: obj.typeOfEvent,
-        venu: obj.venu,
-        venuPhone: obj.venuPhone,
-        venuAddress: obj.venuAddress,
-        date: obj.date,
-        time: obj.time,
-        miles: obj.miles,
-        pricePerMile: obj.pricePerMile,
-        notes: obj.notes,
-        totalPrice: totalPrice(),
-        cakeName: obj.cakeName,
-        customerName: obj.customerName
-      });
-    }
+    getCustomerbyId(cake.customerId).then((res) => {setCustomer(res)});
+    console.log(id);
+    console.log(cake.customerId)
+    console.log(customer.id)
   }, [obj]);
   const resetForm = () => {
     setFormInput(initialState);
@@ -77,7 +60,7 @@ export default function EventForm(obj = {}) {
         cakeId: cake.id,
         totalPrice: totalPrice(),
         cakeName: cake.name,
-        customerName: customer.name,
+        customerName: cake.customerName,
       }).then(() => {
         resetForm();
         navigate(`/Events`);

@@ -51,7 +51,7 @@ export default function CustomerForm({ obj = {} }) {
       ...formInput,
       userId: currentUser,
     }).then((id) => {
-      
+      console.log(id);
       resetForm(); 
       navigate(`/CakeForm/${id}`)
     })

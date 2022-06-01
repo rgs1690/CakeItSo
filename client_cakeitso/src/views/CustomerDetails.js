@@ -13,7 +13,7 @@ export default function CustomerDetails() {
   
   return (
     <div>
-      < CustomerDetailsCard customer={singleCustomer}/>
+      < CustomerDetailsCard customer={singleCustomer} s/>
       </div>
   )
 }
