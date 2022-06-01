@@ -47,7 +47,13 @@ const updateCake = (cakeObj) =>
       .then(() => getCakesByUserId(cakeObj.userId).then(resolve))
       .catch(reject);
   });
-
+  const deleteCake = (id, userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseURL}/cakes/${id}`)
+      .then(() => getCakesByUserId(userId).then(resolve))
+      .catch(reject);
+  });
 export {
   getAllCakes,
   getCakebyId,
@@ -55,4 +61,5 @@ export {
   getCakesByCustomerId,
   createCake,
   updateCake,
+  deleteCake
 };

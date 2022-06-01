@@ -1,6 +1,7 @@
 import React from "react";
 import Proptypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { deleteCake, getCakesByUserId } from "../api/cakeData";
 export default function CakeDetailsCard({ cake }) {
   const navigate = useNavigate();
   const handleClick = () => {
@@ -9,6 +10,13 @@ export default function CakeDetailsCard({ cake }) {
   const handleUpdate = () => {
     
     navigate(`/EditCake/${cake.id}`)
+  }
+  const handleDelete = () => {
+    deleteCake(cake.id).then(() => {
+      getCakesByUserId(cake.userId).then(() => {
+        navigate(`/cakes`)
+      })
+    })
   }
   return (
     <div>
@@ -30,9 +38,9 @@ export default function CakeDetailsCard({ cake }) {
           <button onClick={handleUpdate} className="btn btn-primary">
             Update Cake
           </button>
-          <a href="#" className="btn btn-primary">
+          <button onClick={handleDelete} className="btn btn-primary">
             Delete Cake
-          </a>
+          </button>
         </div>
       </div>
     </div>

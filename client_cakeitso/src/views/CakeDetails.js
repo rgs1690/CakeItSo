@@ -12,7 +12,16 @@ export default function CakeDetails() {
   }, [])
   return (
     <div>
-      < CakeDetailsCard cake={singleCake} />
+      {singleCake ? (
+        < CakeDetailsCard cake={singleCake} />
+
+      ) : (
+        <h2>
+        
+          This cake has been deleted
+        </h2>
+          
+      )}
       </div>
   )
 }

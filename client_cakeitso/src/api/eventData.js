@@ -46,7 +46,13 @@ const updateEvent = (eventObj) =>
       .then(() => getEventsByUserId(eventObj.userId).then(resolve))
       .catch(reject);
   });
-
+  const deleteEvent = (id, userId) => 
+  new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseURL}/events/${id}`)
+      .then(() => getEventsByUserId(userId).then(resolve))
+      .catch(reject);
+  });
 export {
   getAllEvents,
   getEventById,
@@ -54,4 +60,5 @@ export {
   getEventsByCustomerId,
   createEvent,
   updateEvent,
+  deleteEvent
 };

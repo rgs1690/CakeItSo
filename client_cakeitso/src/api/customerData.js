@@ -44,5 +44,5 @@ export {
   getCustomerbyId,
   getCustomersByUserId,
   createCustomer,
-  updateCustomer,
+  updateCustomer
 };
