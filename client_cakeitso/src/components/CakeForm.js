@@ -52,7 +52,7 @@ export default function CakeForm(obj = {}) {
     return answer; 
   }
   const handleClick = (e) => {
-    console.log('button clicked!')
+    e.preventDefault();
      createCake({
        ...formInput,
       userId: currentUser,
