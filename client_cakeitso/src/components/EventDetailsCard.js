@@ -15,6 +15,12 @@ export default function EventDetailsCard({ event }) {
       })
     })
   }
+  const handleCustomer = () => {
+    navigate(`/CustomerDetails/${event.customerId}`)
+  }
+  const handleCake = () => {
+    navigate(`/CakeDetails/${event.cakeId}`)
+  }
   return (
     <div>
       <div class="card" style={{width: "18rem"}}>
@@ -38,8 +44,8 @@ export default function EventDetailsCard({ event }) {
   </ul>
     <p class="card-text">Notes: {event.notes}</p>
   <div class="card-body">
-    <button type="button" class="btn btn-primary">View Customer Info</button>
-    <button type="button" class="btn btn-primary">View Cake Details</button>
+    <button type="button" onClick={handleCustomer} class="btn btn-primary">View Customer Info</button>
+    <button type="button" onClick={handleCake}class="btn btn-primary">View Cake Details</button>
     <button type="button" onClick={handleUpdate} class="btn btn-primary">Update Event</button>
     <button type="button" onClick={handleDelete} class="btn btn-primary">Delete Event</button>
   </div>

@@ -79,5 +79,6 @@ export {
   createEvent,
   updateEvent,
   deleteEvent, 
-  deleteEventsWithCakeId
+  deleteEventsWithCakeId, 
+  getEventsByCakeId
 };

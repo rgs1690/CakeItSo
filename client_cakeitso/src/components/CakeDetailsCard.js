@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Proptypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { deleteCake, getCakesByUserId } from "../api/cakeData";
-import { deleteEventsWithCakeId } from "../api/eventData";
+import { deleteEventsWithCakeId, getEventsByCakeId } from "../api/eventData";
 export default function CakeDetailsCard({ cake }) {
   const navigate = useNavigate();
+  const [event, setEvent] = useState([]);
+  const currentCake = cake.id;
+  useEffect(() => {
+    console.log(currentCake)
+    getEventsByCakeId(currentCake).then(setEvent);
+  }, []);
+
   const handleClick = () => {
     navigate(`/CustomerDetails/${cake.customerId}`);
   };
   const handleUpdate = () => {
-    
-    navigate(`/EditCake/${cake.id}`)
-  }
+    navigate(`/EditCake/${cake.id}`);
+  };
   const handleDelete = () => {
     deleteEventsWithCakeId(cake.id, cake.userId).then(() => {
-      navigate(`/cakes`)
+      navigate(`/cakes`);
+    });
+  };
+ 
 
-    })
-      }
-  
-  
   return (
     <div>
       <div className="card" style={{ width: "18rem" }}>
@@ -27,16 +32,18 @@ export default function CakeDetailsCard({ cake }) {
         <div className="card-body">
           <h5 className={cake.name}>{cake.name}</h5>
           <p className="card-text">
-            Customer: {cake.customerName} <br/>
+            Customer: {cake.customerName} <br />
             Recipe: {cake.recipe} <br />
             Price Per Serving: ${cake.foodCostPerServing} <br />
             Total Cost: ${cake.totalCost}
           </p>
-          <button type='button' className="btn btn-primary" onClick={handleClick}>View Customer Info</button>
-          
-          <a href="#" className="btn btn-primary">
-            View Event Details
-          </a>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleClick}
+          >
+            View Customer Info
+          </button>
           <button onClick={handleUpdate} className="btn btn-primary">
             Update Cake
           </button>
