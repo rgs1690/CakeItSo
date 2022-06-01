@@ -54,6 +54,7 @@ const updateCake = (cakeObj) =>
       .then(() => getCakesByUserId(userId).then(resolve))
       .catch(reject);
   });
+ 
 export {
   getAllCakes,
   getCakebyId,
