@@ -29,29 +29,12 @@ export default function CakeForm(obj = {}) {
   const { id } = useParams();
   useEffect(() => {
     
-    if (obj.id) {
-      getCustomerbyId(obj.customerId).then(setCustomer);
-      setFormInput({
-        id: obj.id,
-        userId: obj.userId,
-        name: obj.name,
-        customerId: obj.customerId,
-        recipe: obj.recipe,
-        foodCostPerServing: obj.foodCostPerServing,
-        numOfGuests: obj.numOfGuests,
-        decorTime: obj.decorTime,
-        bakeTime: obj.bakeTime,
-        wagePerHour: obj.wagePerHour,
-        supplyCost: obj.supplyCost,
-        refImage: obj.refImage,
-        totalCost: obj.totalCost,
-        customerName: obj.customerName,
-      });
-    }
-    else {
-      getCustomerbyId(id).then(setCustomer);
-    }
-  }, [obj]);
+    getCustomerbyId(id).then((res) => {
+      setCustomer(res)
+    });
+    
+  }, []);
+
   const resetForm = () => {
     setFormInput(initialState);
   };
@@ -69,13 +52,7 @@ export default function CakeForm(obj = {}) {
     return answer; 
   }
   const handleClick = (e) => {
-    e.preventDefault();
-   if(obj.id){
-     updateCake(formInput).then(() => {
-       console.log(formInput);
-       navigate(`/CakeDetails/${obj.id}`)
-     })
-   } else {
+    console.log('button clicked!')
      createCake({
        ...formInput,
       userId: currentUser,
@@ -89,7 +66,7 @@ export default function CakeForm(obj = {}) {
      })
    }
  
-  }
+  
   return (
   
     <form onSubmit={handleClick}>
