@@ -16,7 +16,7 @@ const initialState = {
   decorTime: 0,
   bakeTime: 0,
   wagePerHour: 0,
-  supplyCosts: 0,
+  supplyCost: 0,
   refImage: "",
   totalCost: 0,
   customerName: ""

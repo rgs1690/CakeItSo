@@ -16,7 +16,7 @@ const initialState = {
   decorTime: 0,
   bakeTime: 0,
   wagePerHour: 0,
-  supplyCosts: 0,
+  supplyCost: 0,
   refImage: "",
   totalCost: 0,
   customerName: ""
@@ -42,7 +42,7 @@ export default function CakeForm(obj = {}) {
         decorTime: obj.decorTime,
         bakeTime: obj.bakeTime,
         wagePerHour: obj.wagePerHour,
-        supplyCosts: obj.supplyCosts,
+        supplyCost: obj.supplyCost,
         refImage: obj.refImage,
         totalCost: obj.totalCost,
         customerName: obj.customerName,
@@ -186,10 +186,10 @@ export default function CakeForm(obj = {}) {
       <input
         type="text"
         className="form-control"
-        value={formInput.supplyCosts || ""}
+        value={formInput.supplyCost || ""}
         placeholder="Enter extra supply costs"
         onChange={(e) => handleChange(e)}
-        name="supplyCosts"
+        name="supplyCost"
       />
     </div>
     <div className="form-group">
