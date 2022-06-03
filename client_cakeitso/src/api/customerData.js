@@ -1,4 +1,6 @@
 import axios from "axios";
+import { deleteCake, getCakesByCustomerId } from "./cakeData";
+import { deleteEvent, getEventsByCakeId } from "./eventData";
 
 const baseURL = "https://localhost:7139/api";
 
@@ -39,10 +41,33 @@ const updateCustomer = (customerObj) =>
       .then(() => getCustomersByUserId(customerObj.userId).then(resolve))
       .catch(reject);
   });
+const deleteCustomer = (id, userId) =>
+  new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseURL}/customers/${id}`)
+      .then(() => getCustomersByUserId(userId).then(resolve))
+      .catch(reject);
+  });
+const deleteEventsCakesThenCustomer = (customerId, cakeId, eventId, userId) =>
+  new Promise((resolve, reject) => {
+    getCakesByCustomerId(customerId).then((cakeArray) => {
+      const deletedCakes = cakeArray.map((cake) => deleteCake(cakeId, userId));
+      getEventsByCakeId(cakeId).then((eventArray) => {
+        const deletedEvents = eventArray.map((event) =>
+          deleteEvent(eventId, userId)
+        );
+        Promise.all([deletedCakes, deletedEvents]).then(() =>
+          resolve(deleteCustomer(customerId, userId))
+        );
+      });
+    });
+  });
+
 export {
   getAllCustomers,
   getCustomerbyId,
   getCustomersByUserId,
   createCustomer,
-  updateCustomer
+  updateCustomer,
+  deleteEventsCakesThenCustomer,
 };

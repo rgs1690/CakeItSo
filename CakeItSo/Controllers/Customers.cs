@@ -86,6 +86,11 @@ namespace CakeItSo.Controllers
             }
 
         }
+        [HttpDelete("{id}")]
+        public void DeleteCake(int id)
+        {
+            _customerRepo.DeleteCustomer(id);
+        }
 
 
     }

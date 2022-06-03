@@ -47,30 +47,42 @@ const updateEvent = (eventObj) =>
       .then(() => getEventsByUserId(eventObj.userId).then(resolve))
       .catch(reject);
   });
-  const deleteEvent = ( id, userId) => 
+const deleteEvent = (id, userId) =>
   new Promise((resolve, reject) => {
     axios
       .delete(`${baseURL}/events/${id}`)
       .then(() => getEventsByUserId(userId).then(resolve))
       .catch(reject);
   });
-  const getEventsByCakeId = (cakeId) => 
+const getEventsByCakeId = (cakeId) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/events/cake/${cakeId}`)
-      .then((response) => resolve(Object.values(response.data))) 
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  });
+const getSingleEventByCustomerId = (customerId) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/events/singleEvent/${customerId}`)
+      .then((response) => resolve(response.data))
       .catch(reject);
   });
 
-  const deleteEventsWithCakeId = (cakeId, userId) => 
+const deleteEventsWithCakeId = (cakeId, userId) =>
   new Promise((resolve, reject) => [
-    getEventsByCakeId(cakeId).then((eventArray) => {
-      console.log(cakeId, eventArray);
-      const deleteEvents = eventArray.map(((event) => deleteEvent(userId, event.id)));
-    Promise.all(deleteEvents).then(() => resolve(deleteCake(cakeId, userId)))
-    })
-    .catch(reject)
-  ]); 
+    getEventsByCakeId(cakeId)
+      .then((eventArray) => {
+        console.log(cakeId, eventArray);
+        const deleteEvents = eventArray.map((event) =>
+          deleteEvent(userId, event.id)
+        );
+        Promise.all(deleteEvents).then(() =>
+          resolve(deleteCake(cakeId, userId))
+        );
+      })
+      .catch(reject),
+  ]);
 export {
   getAllEvents,
   getEventById,
@@ -78,7 +90,8 @@ export {
   getEventsByCustomerId,
   createEvent,
   updateEvent,
-  deleteEvent, 
-  deleteEventsWithCakeId, 
-  getEventsByCakeId
+  deleteEvent,
+  deleteEventsWithCakeId,
+  getEventsByCakeId,
+  getSingleEventByCustomerId,
 };

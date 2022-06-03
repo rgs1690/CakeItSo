@@ -113,5 +113,16 @@ namespace CakeItSo.Controllers
             _eventRepo.DeleteEvent(id);
         }
 
+        [HttpGet("singleEvent/{customerId}")]
+        public IActionResult GetSingleCakeByCustomerId(int customerId)
+        {
+            var match = _eventRepo.GetSingleEventByCustomerId(customerId);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return Ok(match);
+        }
     }
 }

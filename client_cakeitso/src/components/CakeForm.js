@@ -28,9 +28,9 @@ export default function CakeForm(obj = {}) {
   const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
-    
     getCustomerbyId(id).then((res) => {
       setCustomer(res)
+      console.log(customer)
     });
     
   }, []);
