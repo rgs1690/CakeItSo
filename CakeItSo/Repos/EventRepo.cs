@@ -353,6 +353,58 @@ namespace CakeItSo.Repos
             }
         }
 
+        public Event GetSingleEventByCustomerId(int customerId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                      SELECT 
+                                      Event.id AS EventId, Event.[name] AS EventName, Event.userId As EventUser, Event.customerId As EventCustomer, cakeId, typeOfEvent, venu, venuPhone, venuAddress, date, time, miles,pricePerMile, notes, totalPrice, Customer.[name] AS customerName, Cake.[name] As CakeName, Cake.totalCost AS cakeCost
+                                      FROM Event
+                                      LEFT JOIN Customer ON Customer.id = Event.customerId
+                                      LEFT JOIN Cake ON Cake.id = Event.cakeId
+                                        WHERE Event.customerId = @customerId
+                                      ";
 
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Event selectedEvent = new Event()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("EventId")),
+                            name = reader.GetString(reader.GetOrdinal("EventName")),
+                            userId = reader.GetString(reader.GetOrdinal("EventUser")),
+                            customerId = reader.GetInt32(reader.GetOrdinal("EventCustomer")),
+                            cakeId = reader.GetInt32(reader.GetOrdinal("cakeId")),
+                            typeOfEvent = reader.GetString(reader.GetOrdinal("typeOfEvent")),
+                            venu = reader.GetString(reader.GetOrdinal("venu")),
+                            venuPhone = reader.GetString(reader.GetOrdinal("venuPhone")),
+                            venuAddress = reader.GetString(reader.GetOrdinal("venuAddress")),
+                            date = reader.GetString(reader.GetOrdinal("date")),
+                            time = reader.GetString(reader.GetOrdinal("time")),
+                            miles = reader.GetInt32(reader.GetOrdinal("miles")),
+                            pricePerMile = reader.GetDecimal(reader.GetOrdinal("pricePerMile")),
+                            notes = reader.GetString(reader.GetOrdinal("notes")),
+                            totalPrice = reader.GetDecimal(reader.GetOrdinal("totalPrice")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName")),
+                            cakeName = reader.GetString(reader.GetOrdinal("cakeName")),
+                            cakeCost = reader.GetDecimal(reader.GetOrdinal("cakeCost")),
+                        };
+
+                        reader.Close();
+                        return selectedEvent;
+                    }
+                    reader.Close();
+                    return null;
+                }
+            }
+
+        }
     }
 }

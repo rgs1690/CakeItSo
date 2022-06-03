@@ -10,5 +10,6 @@ namespace CakeItSo.Repos
         public void CreateNewCake(Cake cake);
         public void UpdateCake(Cake cake);
         public void DeleteCake(int id);
+        public Cake GetSingleCakeByCustomerId(int customerId);
     }
 }

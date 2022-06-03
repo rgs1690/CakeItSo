@@ -12,6 +12,7 @@ namespace CakeItSo.Repos
         public List<Event> GetEventsByUserId(string userId);
         public List<Event> GetEventsByCustomerId(int customerId);
         public List<Event> GetEventsByCakeId(int cakeId);
+        public Event GetSingleEventByCustomerId(int customerId);
 
     }
 }

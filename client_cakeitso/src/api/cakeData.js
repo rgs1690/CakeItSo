@@ -47,14 +47,20 @@ const updateCake = (cakeObj) =>
       .then(() => getCakesByUserId(cakeObj.userId).then(resolve))
       .catch(reject);
   });
-  const deleteCake = (id, userId) => 
+const deleteCake = (id, userId) =>
   new Promise((resolve, reject) => {
     axios
       .delete(`${baseURL}/cakes/${id}`)
       .then(() => getCakesByUserId(userId).then(resolve))
       .catch(reject);
   });
- 
+const getSingleCakeByCustomerId = (customerId) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/cakes/singleCake/${customerId}`)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
 export {
   getAllCakes,
   getCakebyId,
@@ -62,5 +68,6 @@ export {
   getCakesByCustomerId,
   createCake,
   updateCake,
-  deleteCake
+  deleteCake,
+  getSingleCakeByCustomerId,
 };

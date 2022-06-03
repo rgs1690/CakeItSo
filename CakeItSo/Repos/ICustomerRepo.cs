@@ -9,5 +9,6 @@ namespace CakeItSo.Repos
         public List<Customer> GetCustomersByUserId(string userId);
         public void CreateCustomer(Customer customer);
         public void UpdateCustomer(Customer customer);
+        public void DeleteCustomer(int id);
     }
 }

@@ -292,6 +292,53 @@ namespace CakeItSo.Repos
             }
         }
 
+        public Cake GetSingleCakeByCustomerId(int customerId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                       SELECT 
+                                        Cake.id AS CAKEId, Cake.[name] AS CAKEName, customerId, recipe, Cake.userId AS CakeUser, foodCostPerServing, numOfGuests, decorTime, bakeTime, wagePerHour, supplyCost, refImage, totalCost,  Customer.[name] AS customerName
+                                      FROM Cake
+                                      LEFT JOIN Customer ON Customer.id = Cake.customerId  
+                                      WHERE Cake.customerId = @customerId
+                                      ";
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
 
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Cake cake = new Cake()
+                        {
+
+                            id = reader.GetInt32(reader.GetOrdinal("CakeId")),
+                            name = reader.GetString(reader.GetOrdinal("CAKEName")),
+                            customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
+                            userId = reader.GetString(reader.GetOrdinal("CakeUser")),
+                            recipe = reader.GetString(reader.GetOrdinal("recipe")),
+                            foodCostPerServing = reader.GetDecimal(reader.GetOrdinal("foodCostPerServing")),
+                            numOfGuests = reader.GetInt32(reader.GetOrdinal("numOfGuests")),
+                            decorTime = reader.GetInt32(reader.GetOrdinal("decorTime")),
+                            bakeTime = reader.GetInt32(reader.GetOrdinal("bakeTime")),
+                            wagePerHour = reader.GetDecimal(reader.GetOrdinal("wagePerHour")),
+                            supplyCost = reader.GetDecimal(reader.GetOrdinal("supplyCost")),
+                            refImage = reader.GetString(reader.GetOrdinal("refImage")),
+                            totalCost = reader.GetDecimal(reader.GetOrdinal("totalCost")),
+                            customerName = reader.GetString(reader.GetOrdinal("customerName"))
+                        };
+
+                        reader.Close();
+                        return cake;
+                    }
+                    reader.Close();
+                    return null;
+                }
+            }
+
+        }
     }
 }
