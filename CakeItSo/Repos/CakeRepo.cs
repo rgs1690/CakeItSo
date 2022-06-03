@@ -130,11 +130,11 @@ namespace CakeItSo.Repos
                     while (reader.Read())
                     {
                         Cake cake = new Cake()
-                        {
+                        {   
                             id = reader.GetInt32(reader.GetOrdinal("CAKEId")),
                             name = reader.GetString(reader.GetOrdinal("CAKEName")),
                             customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
-                            userId = reader.GetString(reader.GetOrdinal("Cakeuser")),
+                            userId = reader.GetString(reader.GetOrdinal("CAKEuser")),
                             recipe = reader.GetString(reader.GetOrdinal("recipe")),
                             foodCostPerServing = reader.GetDecimal(reader.GetOrdinal("foodCostPerServing")),
                             numOfGuests = reader.GetInt32(reader.GetOrdinal("numOfGuests")),

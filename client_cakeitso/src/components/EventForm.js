@@ -24,17 +24,14 @@ const initialState = {
 export default function EventForm(obj = {}) {
   const [formInput, setFormInput] = useState(initialState);
   const [cake, setCake] = useState({});
-  const [customer, setCustomer ] = useState({});
   const navigate = useNavigate();
   const currentUser = getCurrentUsersUid();
   const { id } = useParams();
   useEffect(() => {
     getCakebyId(id).then(setCake);
-    getCustomerbyId(cake.customerId).then((res) => {setCustomer(res)});
-    console.log(id);
-    console.log(cake.customerId)
-    console.log(customer.id)
+  console.log(cake)
   }, [obj]);
+
   const resetForm = () => {
     setFormInput(initialState);
   };
@@ -63,7 +60,7 @@ export default function EventForm(obj = {}) {
         customerName: cake.customerName,
       }).then(() => {
         resetForm();
-        navigate(`/Events`);
+        navigate(`/Customers`);
       });
     }
   };
