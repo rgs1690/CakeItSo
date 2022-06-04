@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Proptypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { deleteCake, getCakesByUserId } from "../api/cakeData";
-import { deleteEventsWithCakeId, getEventsByCakeId } from "../api/eventData";
+import {
+  deleteEventsWithCakeId,
+  getSingleEventByCustomerId,
+} from "../api/eventData";
 export default function CakeDetailsCard({ cake }) {
   const navigate = useNavigate();
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState();
   const currentCake = cake.id;
   useEffect(() => {
-    console.log(currentCake)
-    getEventsByCakeId(currentCake).then(setEvent);
-  }, []);
+    console.log(currentCake);
+    getSingleEventByCustomerId(cake.customerId).then(setEvent);
+  }, [cake]);
 
   const handleClick = () => {
     navigate(`/CustomerDetails/${cake.customerId}`);
@@ -23,7 +25,9 @@ export default function CakeDetailsCard({ cake }) {
       navigate(`/cakes`);
     });
   };
- 
+  const handleEvent = () => {
+    navigate(`/EventDetails/${event.id}`);
+  };
 
   return (
     <div>
@@ -43,6 +47,9 @@ export default function CakeDetailsCard({ cake }) {
             onClick={handleClick}
           >
             View Customer Info
+          </button>
+          <button onClick={handleEvent} className="btn btn-primary">
+            View Event Info
           </button>
           <button onClick={handleUpdate} className="btn btn-primary">
             Update Cake

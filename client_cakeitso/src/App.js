@@ -43,7 +43,7 @@ function App() {
         </>
       ) : (
         <>
-          <Login />
+          <Login user={user} />
         </>
       )}
     </div>

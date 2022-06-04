@@ -8,11 +8,11 @@ export default function EventCard({ event }) {
   }
   return (
     <div>
-      <div class="card" style={{width: "18rem"}}>
-  <div class="card-body">
-    <h5 class="card-title">{event.name}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{event.customerName}</h6>
-    <p class="card-text">
+      <div className="card" style={{width: "18rem"}}>
+  <div className="card-body">
+    <h5 className="card-title">{event.name}</h5>
+    <h6 className="card-subtitle mb-2 text-muted">{event.customerName}</h6>
+    <p className="card-text">
       {event.date}<br/>
       {event.venu}
     </p>
