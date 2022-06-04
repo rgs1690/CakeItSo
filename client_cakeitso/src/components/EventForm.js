@@ -66,6 +66,7 @@ export default function EventForm(obj = {}) {
   };
   return (
     <div>
+      <h1>Add Event Details</h1>
       <form onSubmit={(e) => handleClick(e)}>
         <div className="form-group">
           <label htmlFor="name">Name this event!</label>

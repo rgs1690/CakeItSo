@@ -18,8 +18,8 @@ export default function CustomerCard({ customer }) {
     <div className="card-body">
       <h5 className="card-title">{customer.name}</h5>
       <button type='button' className="btn btn-primary" onClick={handleClick}>View Details</button>
-      <button type='button' className="btn btn-info" onClick={handleCustomerCakes}>View Their Cakes</button>
-      <button type='button' className="btn btn-info" onClick={handleCustomerEvents}>View Their Events</button>
+      <button type='button' className="btn btn-info" onClick={handleCustomerCakes}>View The Cake</button>
+      <button type='button' className="btn btn-info" onClick={handleCustomerEvents}>View The Event</button>
     </div>
   </div>
   </>

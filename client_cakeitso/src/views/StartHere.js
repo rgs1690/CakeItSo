@@ -9,7 +9,7 @@ export default function StartHere() {
   return (
     <div>
       <h1>Start Here</h1>
-      <button type="button" className="btn btn-success" onClick={handleClick}>Add a Customer</button>
+      <button type="button" className="btn btn-success" onClick={handleClick}>Create An Order</button>
       </div>
   )
 }
