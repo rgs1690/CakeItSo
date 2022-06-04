@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Proptypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { deleteCake, getCakesByUserId } from "../api/cakeData";
-import { deleteEventsWithCakeId, getEventsByCakeId, getSingleEventByCustomerId } from "../api/eventData";
+import {
+  deleteEventsWithCakeId,
+  getSingleEventByCustomerId,
+} from "../api/eventData";
 export default function CakeDetailsCard({ cake }) {
   const navigate = useNavigate();
   const [event, setEvent] = useState();
   const currentCake = cake.id;
   useEffect(() => {
-    console.log(currentCake)
-    getSingleEventByCustomerId(cake.customerId).then(setEvent)
-  }, []);
+    console.log(currentCake);
+    getSingleEventByCustomerId(cake.customerId).then(setEvent);
+  }, [cake]);
 
   const handleClick = () => {
     navigate(`/CustomerDetails/${cake.customerId}`);
@@ -22,10 +24,10 @@ export default function CakeDetailsCard({ cake }) {
     deleteEventsWithCakeId(cake.id, cake.userId).then(() => {
       navigate(`/cakes`);
     });
-};
-const handleEvent = () => {
-  navigate(`/EventDetails/${event.id}`);
-}; 
+  };
+  const handleEvent = () => {
+    navigate(`/EventDetails/${event.id}`);
+  };
 
   return (
     <div>

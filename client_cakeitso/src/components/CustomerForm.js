@@ -30,7 +30,13 @@ export default function CustomerForm({ obj = {} }) {
   const resetForm = () => {
     setFormInput(initialState);
   };
-
+  const totalCost = () => {
+    const answer = (formInput.foodCostPerServing * formInput.numOfGuests)
+     + 
+    ((formInput.bakeTime + formInput.decorTime) * formInput.wagePerHour)
+    + formInput.supplyCost; 
+    return answer; 
+  }
   const handleChange = (e) => {
     setFormInput((prevState) => ({
       ...prevState,
@@ -48,6 +54,7 @@ export default function CustomerForm({ obj = {} }) {
       createCustomer({
         ...formInput,
         userId: currentUser,
+        totalCost: totalCost(),
       }).then((id) => {
         console.log(id);
         resetForm();

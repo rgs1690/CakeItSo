@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
 import getCurrentUsersUid from "../helpers/helpers";
 import { getCustomerbyId } from "../api/customerData";
-import { createCake, updateCake } from "../api/cakeData";
+import { createCake } from "../api/cakeData";
 
 const initialState = {
   userId: "",
@@ -44,8 +43,8 @@ export default function CakeForm(obj = {}) {
   };
   const totalCost = () => {
     const answer =
-      formInput.foodCostPerServing * formInput.numOfGuests +
-      (formInput.bakeTime + formInput.decorTime) * formInput.wagePerHour +
+      (formInput.foodCostPerServing * formInput.numOfGuests) +
+      ((formInput.bakeTime + formInput.decorTime) * formInput.wagePerHour) +
       formInput.supplyCost;
     return answer;
   };
