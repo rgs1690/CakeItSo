@@ -13,7 +13,7 @@ export default function EventCard({ event }) {
     <h5 className="card-title">{event.name}</h5>
     <h6 className="card-subtitle mb-2 text-muted">{event.customerName}</h6>
     <p className="card-text">
-      {event.date}<br/>
+      {new Date(event.date) > new Date() ? event.date : 'PASSED' }<br/>
       {event.venu}
     </p>
     <button type="button" onClick={handleClick} className="btn btn-primary">View Details</button>
