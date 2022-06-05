@@ -12,7 +12,18 @@ export default function Events() {
     });
 
   }, []);
-  
+  const passedEvents =[];
+  const datePassed = () => {
+    events.map((event) => {
+     const date = new Date();
+      if (new Date(event.date) < date){
+        passedEvents.push(event)
+      }
+      console.log(passedEvents)
+      return passedEvents;
+    })
+  }
+  datePassed()
   const orderEventsByDate = () => {
     console.log("btn clicked")
     events.sort((a,b) => {
@@ -30,7 +41,7 @@ orderEventsByDate();
       {events ? (
         <>
         {events?.map((event) => (
-          <EventCard key={event.id} event = {event}/>
+          <EventCard key={event.id} event = {event} />
         ))}
         </>
       ) : (

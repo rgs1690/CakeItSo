@@ -16,14 +16,29 @@ export default function YourInfo() {
     return event.totalPrice;
   });
   const moneyEarned = totals.reduce((a, b) => a + b, 0);
-  
+  const passedEvents =[];
+  const upcomingEvents = [];
+  const datePassed = () => {
+    events.map((event) => {
+     const date = new Date();
+      if (new Date(event.date) < date){
+        passedEvents.push(event)
+      } 
+      else {
+        upcomingEvents.push(event)
+      }
+    })
+  }
+  datePassed();
+  console.log(passedEvents.length)
+  console.log(upcomingEvents)
   return (
     <>
       <h1>YourInfo</h1>
       <h3>Total Number of Orders: {customers.length} </h3>
       <h3>Total Money Earned: ${moneyEarned} </h3>
-      <h3>Upcoming Events: </h3>
-      <h3>Past Events: </h3>
+      <h3>Upcoming Events: {passedEvents.length} </h3>
+      <h3>Past Events: {upcomingEvents.length} </h3>
     </>
   );
 }

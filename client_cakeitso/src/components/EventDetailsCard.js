@@ -28,7 +28,7 @@ export default function EventDetailsCard({ event }) {
     <h5 className="card-title">{event.name}</h5>
   </div>
   <ul className="list-group list-group-flush">
-    <li className="list-group-item">{event.date}</li>
+    <li className="list-group-item"> {new Date(event.date) > new Date() ? event.date : 'PASSED' }<br/></li>
     <li className="list-group-item">Customer: {event.customerName}</li>
     <li className="list-group-item">Cake for Event: {event.cakeName}</li>
     <li className="list-group-item">Type: {event.typeOfEvent}</li>
@@ -46,7 +46,7 @@ export default function EventDetailsCard({ event }) {
   <div className="card-body">
     <button type="button" onClick={handleCustomer} className="btn btn-primary">View Customer Info</button>
     <button type="button" onClick={handleCake}className="btn btn-primary">View Cake Details</button>
-    <button type="button" onClick={handleUpdate} className="btn btn-primary">Update Event</button>
+    {new Date(event.date) > new Date() ?   <button type="button" onClick={handleUpdate} className="btn btn-primary">Update Event</button> : 'The date has passed, can no longer update' }<br/>
     <button type="button" onClick={handleDelete} className="btn btn-primary">Delete Event</button>
   </div>
 </div>
